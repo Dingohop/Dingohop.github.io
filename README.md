@@ -1,4 +1,4 @@
-## Hi there 👋
+## Taylor’s Design Media
 
 <!--
 **Dingohop/Dingohop** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
