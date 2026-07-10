@@ -1,7 +1,7 @@
 :root {
-  --bg: #0d1117;
-  --bg-soft: #111827;
-  --card: #161b22;
+  --bg: #1b0920;
+  --bg-soft: #2b0e32;
+  --card: #26132b;
   --text: #f8fafc;
   --muted: #cbd5e1;
   --light-bg: #f8fafc;
@@ -105,7 +105,7 @@ a {
   align-items: center;
   background:
     radial-gradient(circle at top left, rgba(245, 197, 66, 0.22), transparent 38%),
-    linear-gradient(135deg, #0d1117 0%, #111827 100%);
+    linear-gradient(135deg, #1b0920 0%, #2b0e32 100%);
 }
 
 .hero-grid {
@@ -275,6 +275,18 @@ h3 {
   border: 1px solid var(--border);
 }
 
+.work-card {
+
+  text-align: center;
+
+}
+
+.work-content {
+
+  text-align: left;
+
+}
+
 .video-placeholder {
   min-height: 360px;
   background:
@@ -308,7 +320,17 @@ h3 {
 }
 
 .wide-video {
+
   aspect-ratio: 16 / 9;
+
+}
+
+.vertical-video {
+
+  aspect-ratio: 9 / 16;
+
+  max-width: 360px;
+
 }
 
 .work-content {
@@ -390,7 +412,7 @@ h3 {
 }
 
 .contact-section {
-  background: linear-gradient(135deg, #111827 0%, #0d1117 100%);
+  background: linear-gradient(135deg, #1b0920 0%, #2b0e32 100%);
 }
 
 .contact-box {
