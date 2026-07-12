@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description"
-    content="Taylor’s Design Media is the video editing portfolio of Michael Taylor, featuring long-form, podcast, promotional, and short-form editing work." />
-  <title>Taylor’s Design Media | Video Editing Portfolio</title>
+  <meta name="description" content="Taylor’s Design Media is Michael Taylor’s video editing portfolio for short-form, long-form, podcast, promotional, and interview work." />
+  <title>Taylor’s Design Media | Video Editor</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="assets/images/logo-mark.png" />
 </head>
-
 <body>
   <header class="site-header">
     <nav class="nav container" aria-label="Primary navigation">
@@ -18,10 +15,7 @@
         <img src="assets/images/logo-full.png" alt="Taylor’s Design Media logo" />
       </a>
 
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"
-        aria-controls="primary-navigation">
-        ☰
-      </button>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button>
 
       <div class="nav-links" id="primary-navigation">
         <a href="#work">Work</a>
@@ -33,20 +27,19 @@
   </header>
 
   <main id="top">
-    <section class="hero section">
-      <div class="container hero-simple">
-        <p class="eyebrow">Taylor’s Design Media</p>
+    <section class="hero">
+      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
+        <source src="assets/video/hero-video.mp4" type="video/mp4" />
+      </video>
+      <div class="hero-overlay"></div>
 
-        <h1>Video editing that helps your content feel clear, focused, and worth watching.</h1>
-
-        <p class="hero-text">
-          I edit short-form and long-form video for creators, churches,
-          podcasts, and small businesses.
-        </p>
-
-        <div class="hero-buttons">
-          <a href="#work" class="btn btn-primary">View My Work</a>
-          <a href="#contact" class="text-link">Talk about a project →</a>
+      <div class="container hero-content">
+        <p class="eyebrow hero-reveal hero-reveal-1">Taylor’s Design Media</p>
+        <h1 class="hero-reveal hero-reveal-2">I edit video that keeps the story moving.</h1>
+        <p class="hero-text hero-reveal hero-reveal-3">Short-form, long-form, podcasts, interviews, and promotional edits.</p>
+        <div class="hero-actions hero-reveal hero-reveal-4">
+          <a href="#work" class="btn btn-primary">View my work</a>
+          <a href="#contact" class="text-link">Start a project →</a>
         </div>
       </div>
     </section>
@@ -55,116 +48,75 @@
       <div class="container">
         <div class="section-heading">
           <p class="eyebrow">Selected Work</p>
-          <h2>A few projects I've worked on.</h2>
-          <p>
-            Long-form videos, podcasts, promotional content, and other editing projects.
-          </p>
+          <h2>Recent editing work.</h2>
         </div>
 
         <div class="work-grid">
           <article class="work-card coming-soon-card">
-            <div class="video-placeholder vertical-placeholder">
-              <div>
-                <span class="work-type">Short-Form</span>
-                <strong>Sermon Clip</strong>
-              </div>
+            <div class="video-placeholder">
+              <span>Short-Form</span>
+              <strong>Sermon Clip</strong>
             </div>
-
             <div class="work-content">
               <p class="work-category">Church & Ministry</p>
               <h3>Sermon Clip Editing</h3>
-              <p>
-                A focused short-form edit built around one clear takeaway and a social-ready vertical format.
-              </p>
+              <p>Focused short-form editing built around one clear takeaway.</p>
             </div>
           </article>
 
           <article class="work-card">
             <div class="video-embed wide-video">
-              <iframe src="https://www.youtube.com/embed/cc7Ormfb1AQ" title="Informational Video Editing Sample"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
+              <iframe src="https://www.youtube.com/embed/cc7Ormfb1AQ" title="Informational Video Editing Sample" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-
             <div class="work-content">
               <p class="work-category">Informational</p>
               <h3>Informational Video</h3>
-              <p>
-                Long-form editing focused on pacing, message clarity, and keeping the content easy to follow.
-              </p>
+              <p>Long-form editing focused on pacing, clarity, and flow.</p>
             </div>
           </article>
 
           <article class="work-card">
             <div class="video-embed wide-video">
-              <iframe src="https://www.youtube.com/embed/XlQ6_4y-pMM" title="Promotional Video Editing Sample"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
+              <iframe src="https://www.youtube.com/embed/XlQ6_4y-pMM" title="Promotional Video Editing Sample" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-
             <div class="work-content">
               <p class="work-category">Promotional</p>
               <h3>Promotional Video</h3>
-              <p>
-                A promotional edit shaped around a clear opening, focused message, and strong call to action.
-              </p>
+              <p>A concise promo edit with a clear opening and call to action.</p>
             </div>
           </article>
 
           <article class="work-card">
             <div class="video-embed wide-video">
-              <iframe src="https://www.youtube.com/embed/eLOY-t9ioUI" title="Podcast Video Editing Sample"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
+              <iframe src="https://www.youtube.com/embed/eLOY-t9ioUI" title="Podcast Video Editing Sample" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-
             <div class="work-content">
               <p class="work-category">Podcast</p>
               <h3>Podcast Video Editing</h3>
-              <p>
-                Podcast editing focused on cleaner audio, tighter pacing, and simple graphics that support the conversation.
-              </p>
+              <p>Cleaner audio, tighter pacing, and simple supporting graphics.</p>
             </div>
           </article>
 
           <article class="work-card">
             <div class="video-embed wide-video">
-              <iframe src="https://www.youtube.com/embed/Tf19oRK3UwA" title="Long-Form YouTube Video Editing Sample"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen>
-              </iframe>
+              <iframe src="https://www.youtube.com/embed/Tf19oRK3UwA" title="Long-Form YouTube Video Editing Sample" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
-
             <div class="work-content">
               <p class="work-category">YouTube</p>
               <h3>Long-Form Video Editing</h3>
-              <p>
-                A longer-form edit built around stronger pacing, viewer attention, and a clear flow from beginning to end.
-              </p>
+              <p>Long-form editing shaped around pacing and viewer attention.</p>
             </div>
           </article>
 
           <article class="work-card coming-soon-card">
-            <div class="video-placeholder interview-placeholder">
-              <div>
-                <span class="work-type">In Progress</span>
-                <strong>Interview Edit</strong>
-              </div>
+            <div class="video-placeholder">
+              <span>In Progress</span>
+              <strong>Interview Edit</strong>
             </div>
-
             <div class="work-content">
               <p class="work-category">Interview</p>
               <h3>Interview Editing</h3>
-              <p>
-                Interview editing focused on removing distractions, tightening the conversation, and keeping the message clear.
-              </p>
+              <p>A cleaner conversation with distractions and dead space removed.</p>
             </div>
           </article>
         </div>
@@ -172,35 +124,27 @@
     </section>
 
     <section id="services" class="section section-light">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">What I Do</p>
-          <h2>Editing support for the content you're already creating.</h2>
+      <div class="container services-layout">
+        <div class="section-heading services-heading">
+          <p class="eyebrow">Services</p>
+          <h2>Simple editing support.</h2>
         </div>
 
-        <div class="services-main-grid">
-          <article class="main-service-card">
-            <p class="service-number">01</p>
-            <h3>Short-Form Editing</h3>
-            <p>
-              Reels, Shorts, and social clips edited from sermons, podcasts, interviews, and existing footage.
-            </p>
+        <div class="services-list">
+          <article class="service-row">
+            <span>01</span>
+            <h3>Short-Form</h3>
+            <p>Reels, Shorts, and social clips from existing footage.</p>
           </article>
-
-          <article class="main-service-card">
-            <p class="service-number">02</p>
-            <h3>Long-Form Editing</h3>
-            <p>
-              YouTube videos, podcasts, interviews, and informational videos edited for cleaner pacing and a focused message.
-            </p>
+          <article class="service-row">
+            <span>02</span>
+            <h3>Long-Form</h3>
+            <p>YouTube, podcasts, interviews, and informational videos.</p>
           </article>
-
-          <article class="main-service-card">
-            <p class="service-number">03</p>
-            <h3>Content Repurposing</h3>
-            <p>
-              I can review longer videos and help find moments that can become additional short-form content.
-            </p>
+          <article class="service-row">
+            <span>03</span>
+            <h3>Repurposing</h3>
+            <p>Finding strong moments in longer videos for new short-form content.</p>
           </article>
         </div>
       </div>
@@ -210,23 +154,11 @@
       <div class="container about-grid">
         <div>
           <p class="eyebrow">About</p>
-          <h2>I'm Michael, a video editor based in North Carolina.</h2>
+          <h2>I’m Michael, a video editor based on the East Coast.</h2>
         </div>
-
         <div class="about-copy">
-          <p>
-            I started Taylor’s Design Media because I enjoy taking raw footage and shaping it into something clearer,
-            more focused, and easier to watch.
-          </p>
-
-          <p>
-            My work includes podcasts, interviews, informational videos, promotional content, and short-form edits.
-          </p>
-
-          <p>
-            I keep the process simple: understand the goal of the video, clean up what gets in the way, and help the
-            content tell its story.
-          </p>
+          <p>I like taking raw footage and shaping it into something clearer, tighter, and easier to watch.</p>
+          <p>My approach is simple: understand the goal, remove what gets in the way, and keep the story moving.</p>
         </div>
       </div>
     </section>
@@ -234,29 +166,20 @@
     <section id="contact" class="section contact-section">
       <div class="container contact-simple">
         <p class="eyebrow">Contact</p>
-        <h2>Have a video project in mind?</h2>
-
-        <p>
-          Tell me a little about the footage you have and what you're trying to create.
-        </p>
-
-        <a class="btn btn-primary" href="mailto:Michaeltaylor82@gmail.com?subject=Video%20Editing%20Project">
-          Email Me
-        </a>
+        <h2>Have a project in mind?</h2>
+        <p>Tell me what you’re working on and what kind of edit you need.</p>
+        <a class="btn btn-primary" href="mailto:Michaeltaylor82@gmail.com?subject=Video%20Editing%20Project">Email Me</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container footer-content">
-      <p>
-        © <span id="year"></span> Taylor’s Design LLC. Taylor’s Design Media is a service of Taylor’s Design LLC.
-      </p>
+      <p>© <span id="year"></span> Taylor’s Design LLC. Taylor’s Design Media is a service of Taylor’s Design LLC.</p>
       <a href="#top">Back to top</a>
     </div>
   </footer>
 
   <script src="script.js"></script>
 </body>
-
 </html>
