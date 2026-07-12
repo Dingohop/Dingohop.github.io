@@ -180,7 +180,7 @@ h3 {
   max-width: none;
   object-fit: cover;
   object-position: center;
-  opacity: 0.12;
+  opacity: 0.22;
   filter: saturate(0.9) contrast(1.02) brightness(1.05);
   animation: heroVideoMove 18s ease-in-out infinite alternate;
 }
