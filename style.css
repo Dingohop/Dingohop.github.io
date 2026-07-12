@@ -75,7 +75,7 @@ button {
 }
 
 .nav {
-  min-height: 82px;
+  min-height: 92px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -96,7 +96,7 @@ button {
 }
 
 .site-logo img {
-  height: 54px;
+  height: 68px;
   width: auto;
   display: block;
 }
@@ -791,7 +791,7 @@ h3 {
 
   .site-logo img {
 
-    height: 42px;
+    height: 52px;
 
   }
 
@@ -806,7 +806,7 @@ h3 {
   .nav-links {
     display: none;
     position: absolute;
-    top: 82px;
+    top: 92px;
     left: 0;
     right: 0;
     background: var(--bg-soft);
