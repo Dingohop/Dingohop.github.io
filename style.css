@@ -180,7 +180,7 @@ h3 {
   max-width: none;
   object-fit: cover;
   object-position: center;
-  opacity: 0.88;
+  opacity: 0.50;
   filter: saturate(0.9) contrast(1.02) brightness(1.05);
   animation: heroVideoMove 18s ease-in-out infinite alternate;
 }
@@ -234,10 +234,21 @@ h3 {
   animation: heroReveal 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
 }
 
-.hero-reveal-1 { animation-delay: 0.15s; }
-.hero-reveal-2 { animation-delay: 0.3s; }
-.hero-reveal-3 { animation-delay: 0.48s; }
-.hero-reveal-4 { animation-delay: 0.64s; }
+.hero-reveal-1 {
+  animation-delay: 0.15s;
+}
+
+.hero-reveal-2 {
+  animation-delay: 0.3s;
+}
+
+.hero-reveal-3 {
+  animation-delay: 0.48s;
+}
+
+.hero-reveal-4 {
+  animation-delay: 0.64s;
+}
 
 .btn {
   min-height: 48px;
@@ -488,6 +499,7 @@ h3 {
   from {
     transform: scale(1.02);
   }
+
   to {
     transform: scale(1.08);
   }
