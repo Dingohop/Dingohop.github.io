@@ -296,6 +296,92 @@ h3 {
   transition: transform 0.55s ease, filter 0.35s ease;
 }
 
+.editorial-preview {
+  background: #1a0b23;
+}
+
+.editorial-preview-art {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: clamp(24px, 3vw, 38px);
+  text-align: left;
+  background:
+    linear-gradient(120deg, rgba(188, 124, 255, 0.16), transparent 48%),
+    radial-gradient(circle at 82% 18%, rgba(245, 197, 66, 0.18), transparent 26%),
+    linear-gradient(145deg, #2d103c 0%, #14081c 68%);
+  transition: transform 0.5s ease;
+}
+
+.editorial-preview-art::before,
+.editorial-preview-art::after {
+  content: "";
+  position: absolute;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  pointer-events: none;
+}
+
+.editorial-preview-art::before {
+  inset: 18px;
+}
+
+.editorial-preview-art::after {
+  width: 38%;
+  aspect-ratio: 1;
+  top: -14%;
+  right: -4%;
+  border-radius: 50%;
+  border-color: rgba(188, 124, 255, 0.2);
+}
+
+.preview-kicker,
+.preview-detail {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.editorial-preview-art strong {
+  position: relative;
+  z-index: 1;
+  max-width: 10ch;
+  margin: 10px 0 18px;
+  color: var(--text);
+  font-size: clamp(1.65rem, 3vw, 2.75rem);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+}
+
+.preview-line {
+  position: relative;
+  z-index: 1;
+  width: 58px;
+  height: 2px;
+  margin-bottom: 12px;
+  background: var(--accent);
+}
+
+.editorial-preview:hover .editorial-preview-art,
+.editorial-preview:focus-visible .editorial-preview-art {
+  transform: scale(1.025);
+}
+
+.editorial-preview .play-button {
+  z-index: 4;
+}
+
+.editorial-preview .preview-shade {
+  z-index: 2;
+}
+
 .preview-shade {
   position: absolute;
   inset: 0;
@@ -443,18 +529,27 @@ h3 {
 }
 
 .about-copy {
-  max-width: 680px;
+  width: 100%;
+  max-width: 620px;
+  justify-self: start;
 }
 
 .about-copy p {
+  max-width: 60ch;
+  margin: 0;
   color: var(--muted);
-  font-size: 1.08rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.about-copy p + p {
+  margin-top: 20px;
 }
 
 .about-copy p:first-child {
   color: var(--text);
-  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
-  line-height: 1.45;
+  font-size: clamp(1.15rem, 2vw, 1.4rem);
+  line-height: 1.6;
 }
 
 .contact-section {
