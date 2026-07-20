@@ -3,6 +3,7 @@ const navLinks = document.querySelector('.nav-links');
 const navAnchors = document.querySelectorAll('.nav-links a');
 const year = document.querySelector('#year');
 const videoPreviews = document.querySelectorAll('.video-preview');
+const previewImages = document.querySelectorAll('.video-preview img[data-fallback]');
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -22,6 +23,15 @@ if (navToggle && navLinks) {
   });
 }
 
+previewImages.forEach((image) => {
+  image.addEventListener('error', () => {
+    const fallback = image.dataset.fallback;
+
+    if (fallback && image.src !== fallback) {
+      image.src = fallback;
+    }
+  });
+});
 
 videoPreviews.forEach((preview) => {
   preview.addEventListener('click', () => {
