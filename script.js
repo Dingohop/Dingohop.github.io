@@ -20,7 +20,6 @@ if (navToggle && navLinks) {
   const closeNavigation = (returnFocus = false) => {
     navLinks.classList.remove('active');
     navToggle.setAttribute('aria-expanded', 'false');
-    navToggle.setAttribute('aria-label', 'Open main navigation');
 
     if (returnFocus) {
       navToggle.focus();
@@ -30,7 +29,6 @@ if (navToggle && navLinks) {
   navToggle.addEventListener('click', () => {
     const isOpen = navLinks.classList.toggle('active');
     navToggle.setAttribute('aria-expanded', String(isOpen));
-    navToggle.setAttribute('aria-label', isOpen ? 'Close main navigation' : 'Open main navigation');
   });
 
   navAnchors.forEach((anchor) => {
