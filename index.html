@@ -1,75 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Taylor’s Design Media is Michael Taylor’s video editing portfolio for short-form, long-form, podcast, promotional, and interview work." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Taylor’s Design Media is Michael Taylor’s accessible video editing portfolio for sermon clips, short-form, long-form, podcast, promotional, and interview work.">
+  <meta name="theme-color" content="#100617">
   <title>Taylor’s Design Media | Video Editor</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" type="image/png" href="assets/images/logo-mark.png" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="assets/images/logo-mark.png">
+  <script src="script.js" defer></script>
 </head>
 <body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
   <header class="site-header">
     <nav class="nav container" aria-label="Primary navigation">
       <a href="#top" class="site-logo" aria-label="Taylor’s Design Media home">
-        <img src="assets/images/logo-full.png" alt="Taylor’s Design Media logo" />
+        <img src="assets/images/logo-full.png" alt="">
       </a>
 
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="primary-navigation">☰</button>
+      <button class="nav-toggle" type="button" aria-label="Open main navigation" aria-expanded="false" aria-controls="primary-navigation">
+        <span aria-hidden="true">Menu</span>
+      </button>
 
-      <div class="nav-links" id="primary-navigation">
-        <a href="#work">Work</a>
-        <a href="#services">Services</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
+      <ul class="nav-links" id="primary-navigation">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
     </nav>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <video class="hero-video" autoplay muted loop playsinline aria-hidden="true">
-        <source src="assets/video/hero-video.mp4" type="video/mp4" />
+  <main id="main-content" tabindex="-1">
+    <section id="top" class="hero" aria-labelledby="page-title">
+      <video class="hero-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
+        <source src="assets/video/hero-video.mp4" type="video/mp4">
       </video>
-      <div class="hero-overlay"></div>
+      <div class="hero-overlay" aria-hidden="true"></div>
+      <button class="hero-motion-toggle" type="button" aria-pressed="false">Pause background video</button>
 
       <div class="container hero-content">
         <p class="eyebrow hero-reveal hero-reveal-1">Taylor’s Design Media</p>
-        <h1 class="hero-reveal hero-reveal-2">I edit video that keeps the story moving.</h1>
+        <h1 id="page-title" class="hero-reveal hero-reveal-2">I edit video that keeps the story moving.</h1>
         <p class="hero-text hero-reveal hero-reveal-3">Short-form, long-form, podcasts, interviews, and promotional edits.</p>
         <div class="hero-actions hero-reveal hero-reveal-4">
           <a href="#work" class="btn btn-primary">View my work</a>
-          <a href="#contact" class="text-link">Start a project →</a>
+          <a href="#contact" class="text-link">Start a project <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
 
-    <section id="work" class="section portfolio-section">
+    <section id="work" class="section portfolio-section" aria-labelledby="work-heading">
       <div class="container">
         <div class="section-heading">
           <p class="eyebrow">Selected Work</p>
-          <h2>Recent editing work.</h2>
+          <h2 id="work-heading">Recent editing work.</h2>
         </div>
 
         <div class="work-grid">
-          <article class="work-card coming-soon-card">
-            <div class="video-placeholder">
-              <span>Short-Form</span>
-              <strong>Sermon Clip</strong>
-            </div>
+          <article class="work-card">
+            <a class="video-preview" href="https://youtube.com/shorts/3fQs762NWMI" data-video-id="3fQs762NWMI" data-video-title="Sermon Clip Editing" data-video-aspect="portrait" aria-label="Watch the Sermon Clip Editing video">
+              <img src="https://i.ytimg.com/vi/3fQs762NWMI/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+              <span class="preview-shade" aria-hidden="true"></span>
+              <span class="play-button" aria-hidden="true">▶</span>
+            </a>
             <div class="work-content">
-              <p class="work-category">Church & Ministry</p>
+              <p class="work-category">Church &amp; Ministry</p>
               <h3>Sermon Clip Editing</h3>
               <p>Focused short-form editing built around one clear takeaway.</p>
             </div>
           </article>
 
           <article class="work-card">
-            <button class="video-preview" data-video-id="cc7Ormfb1AQ" aria-label="Play Informational Video">
-              <img src="assets/images/informational-preview.svg" alt="Informational video project preview" />
+            <a class="video-preview" href="https://www.youtube.com/watch?v=cc7Ormfb1AQ" data-video-id="cc7Ormfb1AQ" data-video-title="Informational Video" aria-label="Watch the Informational Video">
+              <img src="assets/images/informational-preview.svg" alt="" loading="lazy" decoding="async">
               <span class="preview-shade" aria-hidden="true"></span>
               <span class="play-button" aria-hidden="true">▶</span>
-            </button>
+            </a>
             <div class="work-content">
               <p class="work-category">Informational</p>
               <h3>Informational Video</h3>
@@ -78,11 +86,11 @@
           </article>
 
           <article class="work-card">
-            <button class="video-preview" data-video-id="XlQ6_4y-pMM" aria-label="Play Promotional Video">
-              <img src="https://i.ytimg.com/vi/XlQ6_4y-pMM/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/XlQ6_4y-pMM/hqdefault.jpg" alt="Promotional video project preview" />
+            <a class="video-preview" href="https://www.youtube.com/watch?v=XlQ6_4y-pMM" data-video-id="XlQ6_4y-pMM" data-video-title="Promotional Video" aria-label="Watch the Promotional Video">
+              <img src="https://i.ytimg.com/vi/XlQ6_4y-pMM/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/XlQ6_4y-pMM/hqdefault.jpg" alt="" loading="lazy" decoding="async">
               <span class="preview-shade" aria-hidden="true"></span>
               <span class="play-button" aria-hidden="true">▶</span>
-            </button>
+            </a>
             <div class="work-content">
               <p class="work-category">Promotional</p>
               <h3>Promotional Video</h3>
@@ -91,11 +99,11 @@
           </article>
 
           <article class="work-card">
-            <button class="video-preview" data-video-id="eLOY-t9ioUI" aria-label="Play Podcast Video">
-              <img src="https://i.ytimg.com/vi/eLOY-t9ioUI/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/eLOY-t9ioUI/hqdefault.jpg" alt="Podcast video project preview" />
+            <a class="video-preview" href="https://www.youtube.com/watch?v=eLOY-t9ioUI" data-video-id="eLOY-t9ioUI" data-video-title="Podcast Video Editing" aria-label="Watch the Podcast Video Editing sample">
+              <img src="https://i.ytimg.com/vi/eLOY-t9ioUI/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/eLOY-t9ioUI/hqdefault.jpg" alt="" loading="lazy" decoding="async">
               <span class="preview-shade" aria-hidden="true"></span>
               <span class="play-button" aria-hidden="true">▶</span>
-            </button>
+            </a>
             <div class="work-content">
               <p class="work-category">Podcast</p>
               <h3>Podcast Video Editing</h3>
@@ -104,11 +112,11 @@
           </article>
 
           <article class="work-card">
-            <button class="video-preview" data-video-id="Tf19oRK3UwA" aria-label="Play Long-Form Video">
-              <img src="https://i.ytimg.com/vi/Tf19oRK3UwA/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/Tf19oRK3UwA/hqdefault.jpg" alt="Long-form video project preview" />
+            <a class="video-preview" href="https://www.youtube.com/watch?v=Tf19oRK3UwA" data-video-id="Tf19oRK3UwA" data-video-title="Long-Form Video Editing" aria-label="Watch the Long-Form Video Editing sample">
+              <img src="https://i.ytimg.com/vi/Tf19oRK3UwA/maxresdefault.jpg" data-fallback="https://i.ytimg.com/vi/Tf19oRK3UwA/hqdefault.jpg" alt="" loading="lazy" decoding="async">
               <span class="preview-shade" aria-hidden="true"></span>
               <span class="play-button" aria-hidden="true">▶</span>
-            </button>
+            </a>
             <div class="work-content">
               <p class="work-category">YouTube</p>
               <h3>Long-Form Video Editing</h3>
@@ -117,13 +125,15 @@
           </article>
 
           <article class="work-card">
-            <button class="video-preview" data-video-id="-mmrp1zFUxE" aria-label="Play Interview Editing Sample">
+            <a class="video-preview" href="https://www.youtube.com/watch?v=-mmrp1zFUxE" data-video-id="-mmrp1zFUxE" data-video-title="Interview Editing" aria-label="Watch the Interview Editing sample">
               <img src="https://i.ytimg.com/vi/-mmrp1zFUxE/maxresdefault.jpg"
                 data-fallback="https://i.ytimg.com/vi/-mmrp1zFUxE/hqdefault.jpg"
-                alt="Interview editing project preview" />
+                alt=""
+                loading="lazy"
+                decoding="async">
               <span class="preview-shade" aria-hidden="true"></span>
               <span class="play-button" aria-hidden="true">▶</span>
-            </button>
+            </a>
             <div class="work-content">
               <p class="work-category">Interview</p>
               <h3>Interview Editing</h3>
@@ -134,11 +144,11 @@
       </div>
     </section>
 
-    <section id="services" class="section section-light">
+    <section id="services" class="section section-light" aria-labelledby="services-heading">
       <div class="container services-layout">
         <div class="section-heading services-heading">
           <p class="eyebrow">Services</p>
-          <h2>Simple editing support.</h2>
+          <h2 id="services-heading">Simple editing support.</h2>
         </div>
 
         <div class="services-list">
@@ -161,11 +171,11 @@
       </div>
     </section>
 
-    <section id="about" class="section about-section">
+    <section id="about" class="section about-section" aria-labelledby="about-heading">
       <div class="container about-grid">
         <div>
           <p class="eyebrow">About</p>
-          <h2>Thoughtful editing focused on clarity, pacing, and story.</h2>
+          <h2 id="about-heading">Thoughtful editing focused on clarity, pacing, and story.</h2>
         </div>
         <div class="about-copy">
           <p>I’m Michael Taylor, a video editor based on the East Coast. I work with creators, churches, podcasts, and small businesses to turn raw footage into polished, engaging video content.</p>
@@ -175,23 +185,24 @@
       </div>
     </section>
 
-    <section id="contact" class="section contact-section">
+    <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
       <div class="container contact-simple">
         <p class="eyebrow">Contact</p>
-        <h2>Have a project in mind?</h2>
+        <h2 id="contact-heading">Have a project in mind?</h2>
         <p>Tell me what you’re working on and what kind of edit you need.</p>
-        <a class="btn btn-primary" href="mailto:Michaeltaylor82@gmail.com?subject=Video%20Editing%20Project">Email Me</a>
+        <a class="btn btn-primary" href="mailto:michaeltaylor82@gmail.com?subject=Video%20Editing%20Project">Email Me</a>
       </div>
     </section>
   </main>
 
   <footer class="footer">
     <div class="container footer-content">
-      <p>© <span id="year"></span> Taylor’s Design LLC. Taylor’s Design Media is a service of Taylor’s Design LLC.</p>
-      <a href="#top">Back to top</a>
+      <p>© <span id="year">2026</span> Taylor’s Design LLC. Taylor’s Design Media is a service of Taylor’s Design LLC.</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="accessibility.html">Accessibility</a>
+        <a href="#top">Back to top</a>
+      </nav>
     </div>
   </footer>
-
-  <script src="script.js"></script>
 </body>
 </html>
