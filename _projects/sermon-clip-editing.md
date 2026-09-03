@@ -14,7 +14,6 @@ source_length:
 final_length:
 deliverables:
 tools:
-  - DaVinci Resolve
 skills:
 # stills:
 #   - src: /assets/images/projects/sermon-clip-editing-timeline.png
