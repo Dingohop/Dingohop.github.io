@@ -1,0 +1,32 @@
+{%- assign p = include.project -%}
+{%- assign rendered = p.content | markdownify -%}
+{%- assign writeup = rendered | strip_html | strip -%}
+<article class="project-row" data-category="{{ p.category | slugify }}" id="project-{{ p.title | slugify }}">
+
+  <div class="project-row-media">
+    {% include video-embed.html project=p %}
+  </div>
+
+  <div class="project-row-body">
+    <p class="work-category">{{ p.category }}</p>
+    <h3 class="project-row-title">{{ p.title }}</h3>
+    {% if p.summary %}<p class="project-row-summary">{{ p.summary }}</p>{% endif %}
+
+    {% if writeup != '' %}
+    <div class="project-row-writeup prose">{{ rendered }}</div>
+    {% endif %}
+
+    {%- capture specs -%}
+      {% if p.client %}<div class="spec-row"><dt>Client</dt><dd>{{ p.client }}</dd></div>{% endif %}
+      {% if p.completed %}<div class="spec-row"><dt>Completed</dt><dd>{{ p.completed }}</dd></div>{% endif %}
+      {% if p.source_length %}<div class="spec-row"><dt>Source</dt><dd>{{ p.source_length }}</dd></div>{% endif %}
+      {% if p.final_length %}<div class="spec-row"><dt>Runtime</dt><dd>{{ p.final_length }}</dd></div>{% endif %}
+      {% if p.deliverables %}<div class="spec-row"><dt>Deliverables</dt><dd>{{ p.deliverables }}</dd></div>{% endif %}
+      {% if p.tools %}<div class="spec-row"><dt>Tools</dt><dd>{{ p.tools | join: ", " }}</dd></div>{% endif %}
+      {% if p.skills %}<div class="spec-row"><dt>Focus</dt><dd>{{ p.skills | join: ", " }}</dd></div>{% endif %}
+    {%- endcapture -%}
+    {%- assign specs_trimmed = specs | strip -%}
+    {% if specs_trimmed != '' %}<dl class="project-row-specs">{{ specs }}</dl>{% endif %}
+  </div>
+
+</article>

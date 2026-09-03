@@ -153,11 +153,11 @@ videoPreviews.forEach((preview) => {
 
 /* ---------- Category filtering on the work index ---------- */
 const filterChips = document.querySelectorAll('.filter-chip');
-const workCards = document.querySelectorAll('#work-grid .work-card');
+const projectRows = document.querySelectorAll('#project-list .project-row');
 const workEmpty = document.querySelector('.work-empty');
 const filterStatus = document.querySelector('.filter-status');
 
-if (filterChips.length && workCards.length) {
+if (filterChips.length && projectRows.length) {
   filterChips.forEach((chip) => {
     chip.addEventListener('click', () => {
       const filter = chip.dataset.filter;
@@ -169,9 +169,9 @@ if (filterChips.length && workCards.length) {
         other.setAttribute('aria-pressed', String(isActive));
       });
 
-      workCards.forEach((card) => {
-        const match = filter === 'all' || card.dataset.category === filter;
-        card.hidden = !match;
+      projectRows.forEach((row) => {
+        const match = filter === 'all' || row.dataset.category === filter;
+        row.hidden = !match;
         if (match) {
           shown += 1;
         }
@@ -184,6 +184,13 @@ if (filterChips.length && workCards.length) {
       if (filterStatus) {
         const label = filter === 'all' ? 'all categories' : chip.textContent.trim();
         filterStatus.textContent = `Showing ${shown} ${shown === 1 ? 'project' : 'projects'} in ${label}.`;
+        const firstVisible = document.querySelector('#project-list .project-row:not([hidden])');
+        if (firstVisible) {
+          firstVisible.classList.add('is-first-visible');
+        }
+        projectRows.forEach((row) => {
+          if (row !== firstVisible) { row.classList.remove('is-first-visible'); }
+        });
       }
     });
   });

@@ -16,3 +16,6 @@ Gemfile.lock
 # Local preview scratch
 _preview/
 *.tgz
+
+# Files the desktop app drops here from chat
+Claude outputs/

@@ -18,15 +18,9 @@ twitter:
 
 collections:
   projects:
-    output: true
-    permalink: /work/:name/
-
-defaults:
-  - scope:
-      path: ""
-      type: projects
-    values:
-      layout: project
+    # output: false -- every project renders inline on the one page,
+    # so no per-project pages are generated.
+    output: false
 
 plugins:
   - jekyll-sitemap

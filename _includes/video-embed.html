@@ -1,12 +1,13 @@
 {%- assign p = include.project -%}
 {%- if p.thumbnail -%}
   {%- assign thumb = p.thumbnail | relative_url -%}
-{%- elsif p.aspect == "portrait" -%}
+{%- elsif p.video_id and p.aspect == "portrait" -%}
   {%- assign thumb = "https://i.ytimg.com/vi/" | append: p.video_id | append: "/hqdefault.jpg" -%}
-{%- else -%}
+{%- elsif p.video_id -%}
   {%- assign thumb = "https://i.ytimg.com/vi/" | append: p.video_id | append: "/maxresdefault.jpg" -%}
 {%- endif -%}
 <div class="player-slot{% if p.aspect == 'portrait' %} is-portrait{% endif %}">
+  {%- if p.video_id -%}
   <a class="video-preview" href="https://www.youtube.com/watch?v={{ p.video_id }}"
      data-video-id="{{ p.video_id }}"
      data-video-title="{{ p.title | escape }}"
@@ -16,4 +17,15 @@
     <span class="play-button" aria-hidden="true">&#9654;</span>
     <span class="preview-label">Play {{ p.title }}</span>
   </a>
+  {%- elsif p.video_file -%}
+  <video class="self-hosted-player" controls preload="none"
+         {% if thumb %}poster="{{ thumb }}"{% endif %}>
+    <source src="{{ p.video_file | relative_url }}" type="video/mp4">
+  </video>
+  {%- else -%}
+  <div class="video-placeholder">
+    <strong>{{ p.title }}</strong>
+    <span>Video link pending</span>
+  </div>
+  {%- endif -%}
 </div>
