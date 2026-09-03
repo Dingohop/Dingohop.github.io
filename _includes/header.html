@@ -1,0 +1,18 @@
+<header class="site-header">
+  <nav class="nav container" aria-label="Primary navigation">
+    <a href="{{ '/' | relative_url }}" class="site-logo">
+      <img src="{{ '/assets/images/logo-full.png' | relative_url }}" alt="Taylor's Design Media">
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
+      <span>Menu</span>
+    </button>
+
+    <ul class="nav-links" id="primary-navigation">
+      <li><a href="{{ '/work/' | relative_url }}">Work</a></li>
+      <li><a href="{{ '/#services' | relative_url }}">Services</a></li>
+      <li><a href="{{ '/#about' | relative_url }}">About</a></li>
+      <li><a href="{{ '/#contact' | relative_url }}">Contact</a></li>
+    </ul>
+  </nav>
+</header>

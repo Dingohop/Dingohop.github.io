@@ -5,7 +5,7 @@ const navLinks = document.querySelector('.nav-links');
 const navAnchors = document.querySelectorAll('.nav-links a');
 const year = document.querySelector('#year');
 const videoPreviews = document.querySelectorAll('.video-preview');
-const previewImages = document.querySelectorAll('.video-preview img[data-fallback]');
+const fallbackImages = document.querySelectorAll('img[data-fallback]');
 const hero = document.querySelector('.hero');
 const heroVideo = document.querySelector('.hero-video');
 const heroMotionToggle = document.querySelector('.hero-motion-toggle');
@@ -16,6 +16,7 @@ if (year) {
   year.textContent = new Date().getFullYear();
 }
 
+/* ---------- Navigation ---------- */
 if (navToggle && navLinks) {
   const closeNavigation = (returnFocus = false) => {
     navLinks.classList.remove('active');
@@ -52,7 +53,8 @@ if (navToggle && navLinks) {
   mobileNavigation.addEventListener('change', () => closeNavigation());
 }
 
-previewImages.forEach((image) => {
+/* ---------- Thumbnail fallbacks ---------- */
+fallbackImages.forEach((image) => {
   image.addEventListener('error', () => {
     const fallback = image.dataset.fallback;
 
@@ -62,6 +64,7 @@ previewImages.forEach((image) => {
   });
 });
 
+/* ---------- Hero background motion ---------- */
 let heroMotionPaused = reducedMotion.matches;
 
 const applyHeroMotionPreference = () => {
@@ -70,7 +73,6 @@ const applyHeroMotionPreference = () => {
   }
 
   hero.classList.toggle('motion-paused', heroMotionPaused);
-  heroMotionToggle.setAttribute('aria-pressed', String(heroMotionPaused));
   heroMotionToggle.textContent = heroMotionPaused ? 'Play background video' : 'Pause background video';
 
   if (heroMotionPaused) {
@@ -79,7 +81,7 @@ const applyHeroMotionPreference = () => {
   }
 
   heroVideo.play().catch(() => {
-    // The gradient background remains visible if autoplay is unavailable.
+    // The poster frame remains visible if autoplay is unavailable.
   });
 };
 
@@ -97,6 +99,7 @@ reducedMotion.addEventListener('change', (event) => {
   applyHeroMotionPreference();
 });
 
+/* ---------- Click-to-load video players ---------- */
 videoPreviews.forEach((preview) => {
   preview.addEventListener('click', (event) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
@@ -111,19 +114,77 @@ videoPreviews.forEach((preview) => {
 
     event.preventDefault();
 
+    const slot = preview.closest('.player-slot') || preview.parentElement;
+    const title = preview.dataset.videoTitle || 'Video project';
+
     const iframe = document.createElement('iframe');
     iframe.className = 'portfolio-player';
     if (preview.dataset.videoAspect === 'portrait') {
       iframe.classList.add('is-portrait');
     }
     iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1&cc_load_policy=1&hl=en`;
-    iframe.title = `${preview.dataset.videoTitle || 'Video project'} player`;
+    iframe.title = `${title} player`;
     iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
     iframe.allowFullscreen = true;
     iframe.referrerPolicy = 'strict-origin-when-cross-origin';
     iframe.tabIndex = 0;
 
-    preview.replaceWith(iframe);
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'player-close';
+    closeButton.textContent = 'Close video';
+
+    const shell = document.createElement('div');
+    shell.className = 'player-shell';
+    shell.append(iframe, closeButton);
+
+    preview.hidden = true;
+    slot.append(shell);
+
+    closeButton.addEventListener('click', () => {
+      shell.remove();
+      preview.hidden = false;
+      preview.focus();
+    });
+
     iframe.addEventListener('load', () => iframe.focus(), { once: true });
   });
 });
+
+/* ---------- Category filtering on the work index ---------- */
+const filterChips = document.querySelectorAll('.filter-chip');
+const workCards = document.querySelectorAll('#work-grid .work-card');
+const workEmpty = document.querySelector('.work-empty');
+const filterStatus = document.querySelector('.filter-status');
+
+if (filterChips.length && workCards.length) {
+  filterChips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const filter = chip.dataset.filter;
+      let shown = 0;
+
+      filterChips.forEach((other) => {
+        const isActive = other === chip;
+        other.classList.toggle('is-active', isActive);
+        other.setAttribute('aria-pressed', String(isActive));
+      });
+
+      workCards.forEach((card) => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.hidden = !match;
+        if (match) {
+          shown += 1;
+        }
+      });
+
+      if (workEmpty) {
+        workEmpty.hidden = shown !== 0;
+      }
+
+      if (filterStatus) {
+        const label = filter === 'all' ? 'all categories' : chip.textContent.trim();
+        filterStatus.textContent = `Showing ${shown} ${shown === 1 ? 'project' : 'projects'} in ${label}.`;
+      }
+    });
+  });
+}

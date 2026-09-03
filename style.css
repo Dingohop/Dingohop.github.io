@@ -504,3 +504,225 @@ h3 { margin-bottom: 10px; font-size: 1.35rem; }
   .nav-toggle,
   .hero-motion-toggle { border: 2px solid ButtonText; }
 }
+
+/* ============================================================
+   Portfolio: cards, filters, and project pages
+   ============================================================ */
+
+/* --- Work cards linking to project pages --- */
+.work-card { position: relative; display: flex; flex-direction: column; }
+.work-card-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #0b0710;
+}
+.work-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .45s ease, filter .3s ease;
+}
+.work-card:hover .work-card-media img { transform: scale(1.035); filter: brightness(.9); }
+.work-card:hover .play-button,
+.work-card:focus-within .play-button {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: var(--accent);
+  color: #17101c;
+}
+.work-title { margin-bottom: 10px; font-size: 1.38rem; }
+.work-title a { text-decoration: none; }
+.stretched-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.work-card:focus-within { border-color: var(--accent); }
+.work-summary { margin-bottom: 0; color: var(--muted); }
+.work-ratio {
+  margin: 10px 0 0;
+  color: var(--purple-bright);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+}
+.work-grid-more { margin: 34px 0 0; }
+.work-empty { margin-top: 28px; color: var(--muted); }
+
+/* --- Category filters --- */
+.work-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.filter-chip {
+  min-height: 44px;
+  padding: 8px 18px;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: .9rem;
+  font-weight: 700;
+  transition: color .2s ease, background .2s ease, border-color .2s ease;
+}
+.filter-chip:hover { color: var(--text); border-color: var(--purple-border); }
+.filter-chip.is-active {
+  color: #17101c;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* --- Project detail page --- */
+.project { padding: 56px 0 88px; }
+.project-head { max-width: 860px; margin-bottom: 36px; }
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  margin-bottom: 18px;
+  color: var(--accent);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+.project-head h1 { font-size: clamp(2.4rem, 5vw, 4.2rem); margin-bottom: 18px; }
+.project-lede { margin-bottom: 0; color: var(--muted); font-size: 1.2rem; }
+
+.project-player { margin-bottom: 56px; }
+.player-slot { position: relative; width: 100%; aspect-ratio: 16 / 9; }
+.player-slot.is-portrait {
+  aspect-ratio: 9 / 16;
+  max-width: 360px;
+  margin: 0 auto;
+}
+.player-slot .video-preview,
+.player-slot .portfolio-player {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 18px;
+}
+.player-slot .portfolio-player.is-portrait { aspect-ratio: auto; }
+
+.project-body {
+  display: grid;
+  grid-template-columns: 1.6fr .9fr;
+  gap: 64px;
+  align-items: start;
+}
+.project-body.is-bare { grid-template-columns: minmax(0, 460px); }
+.project-write-up > *:first-child { margin-top: 0; }
+.project-write-up h2 {
+  margin-top: 38px;
+  font-size: clamp(1.5rem, 2.6vw, 2rem);
+  letter-spacing: -.025em;
+}
+.project-write-up h2:first-child { margin-top: 0; }
+.project-write-up p, .project-write-up li { color: var(--muted); font-size: 1.05rem; }
+
+.project-specs {
+  padding: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+.project-specs h2 {
+  margin-bottom: 20px;
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.project-specs dl { margin: 0; }
+.spec-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 14px 0;
+  border-top: 1px solid var(--border);
+}
+.spec-row:first-child { border-top: 0; padding-top: 0; }
+.spec-row dt {
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.spec-row dd { margin: 0; font-weight: 700; }
+.spec-cta { margin-top: 24px; width: 100%; }
+
+.project-stills { margin-top: 72px; }
+.project-stills h2 { margin-bottom: 24px; }
+.stills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+.stills-grid figure { margin: 0; }
+.stills-grid img { width: 100%; border: 1px solid var(--border); border-radius: 12px; }
+.stills-grid figcaption { margin-top: 8px; color: var(--muted); font-size: .9rem; }
+
+.project-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 72px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.project-nav-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 48%;
+  padding: 8px 0;
+}
+.project-nav-link.is-next { margin-left: auto; text-align: right; }
+.project-nav-label {
+  color: var(--accent);
+  font-size: .76rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.project-nav-title { font-size: 1.15rem; font-weight: 700; }
+.project-nav-link:hover .project-nav-title { color: var(--accent); }
+
+/* --- Player close control --- */
+.player-shell { position: relative; width: 100%; height: 100%; }
+.player-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 3;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 14px;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--muted);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: .82rem;
+  font-weight: 700;
+}
+.player-close:hover { background: var(--accent); color: #17101c; }
+
+@media (max-width: 980px) {
+  .project-body { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 760px) {
+  .project { padding: 32px 0 64px; }
+  .project-player { margin-bottom: 40px; }
+  .project-nav-link { max-width: 100%; }
+  .project-nav-link.is-next { margin-left: 0; text-align: left; }
+}

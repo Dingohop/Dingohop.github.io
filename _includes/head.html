@@ -1,0 +1,32 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100617">
+
+{% seo %}
+
+<link rel="stylesheet" href="{{ '/style.css' | relative_url }}">
+<link rel="icon" type="image/png" href="{{ '/assets/images/logo-mark.png' | relative_url }}">
+<script src="{{ '/script.js' | relative_url }}" defer></script>
+
+{% if page.url == '/' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Taylor's Design Media",
+  "alternateName": "Taylor's Design LLC",
+  "url": "{{ site.url }}",
+  "logo": "{{ '/assets/images/logo-full.png' | absolute_url }}",
+  "image": "{{ '/assets/images/social-card.png' | absolute_url }}",
+  "email": "{{ site.email }}",
+  "description": {{ site.description | strip_newlines | strip | jsonify }},
+  "founder": {
+    "@type": "Person",
+    "name": "Michael Taylor",
+    "jobTitle": "Video Editor"
+  },
+  "serviceType": "Video editing",
+  "areaServed": "US"
+}
+</script>
+{% endif %}

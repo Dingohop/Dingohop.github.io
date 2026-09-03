@@ -1,0 +1,94 @@
+---
+layout: default
+---
+{%- assign projects = site.projects | sort: "order" -%}
+{%- assign found = false -%}
+{%- for p in projects -%}
+  {%- if found == true and next_p == nil -%}{%- assign next_p = p -%}{%- endif -%}
+  {%- if p.url == page.url -%}{%- assign found = true -%}{%- endif -%}
+  {%- if found == false -%}{%- assign prev_p = p -%}{%- endif -%}
+{%- endfor -%}
+
+<article class="project">
+
+  <div class="container project-head">
+    <a class="back-link" href="{{ '/work/' | relative_url }}"><span aria-hidden="true">&larr;&nbsp;</span>All work</a>
+    <p class="eyebrow">{{ page.category }}</p>
+    <h1>{{ page.title }}</h1>
+    {% if page.summary %}<p class="project-lede">{{ page.summary }}</p>{% endif %}
+  </div>
+
+  <div class="container project-player">
+    {% include video-embed.html project=page %}
+  </div>
+
+  {% assign writeup = content | strip_html | strip %}
+  <div class="container project-body{% if writeup == '' %} is-bare{% endif %}">
+
+    {% if writeup != '' %}
+    <div class="project-write-up prose">
+      {{ content }}
+    </div>
+    {% endif %}
+
+    <aside class="project-specs" aria-labelledby="project-specs-heading">
+      <h2 id="project-specs-heading">Project details</h2>
+      <dl>
+        {% if page.client %}
+        <div class="spec-row"><dt>Client</dt><dd>{{ page.client }}</dd></div>
+        {% endif %}
+        <div class="spec-row"><dt>Category</dt><dd>{{ page.category }}</dd></div>
+        {% if page.completed %}
+        <div class="spec-row"><dt>Completed</dt><dd>{{ page.completed }}</dd></div>
+        {% endif %}
+        {% if page.source_length %}
+        <div class="spec-row"><dt>Source footage</dt><dd>{{ page.source_length }}</dd></div>
+        {% endif %}
+        {% if page.final_length %}
+        <div class="spec-row"><dt>Final runtime</dt><dd>{{ page.final_length }}</dd></div>
+        {% endif %}
+        {% if page.deliverables %}
+        <div class="spec-row"><dt>Deliverables</dt><dd>{{ page.deliverables }}</dd></div>
+        {% endif %}
+        {% if page.tools %}
+        <div class="spec-row"><dt>Tools</dt><dd>{{ page.tools | join: ", " }}</dd></div>
+        {% endif %}
+        {% if page.skills %}
+        <div class="spec-row"><dt>Focus</dt><dd>{{ page.skills | join: ", " }}</dd></div>
+        {% endif %}
+      </dl>
+      <a class="btn btn-primary spec-cta" href="mailto:{{ site.email }}?subject=Video%20Editing%20Project">Email me</a>
+    </aside>
+
+  </div>
+
+  {% if page.stills %}
+  <div class="container project-stills">
+    <h2>Stills from the edit</h2>
+    <div class="stills-grid">
+      {% for still in page.stills %}
+      <figure>
+        <img src="{{ still.src | relative_url }}" alt="{{ still.alt }}" loading="lazy" decoding="async">
+        {% if still.caption %}<figcaption>{{ still.caption }}</figcaption>{% endif %}
+      </figure>
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+
+  <nav class="container project-nav" aria-label="Project navigation">
+    {% if prev_p %}
+    <a class="project-nav-link is-prev" href="{{ prev_p.url | relative_url }}">
+      <span class="project-nav-label"><span aria-hidden="true">&larr;</span> Previous</span>
+      <span class="project-nav-title">{{ prev_p.title }}</span>
+    </a>
+    {% endif %}
+    {% if next_p %}
+    <a class="project-nav-link is-next" href="{{ next_p.url | relative_url }}">
+      <span class="project-nav-label">Next <span aria-hidden="true">&rarr;</span></span>
+      <span class="project-nav-title">{{ next_p.title }}</span>
+    </a>
+    {% endif %}
+  </nav>
+
+</article>

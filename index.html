@@ -1,230 +1,102 @@
-<!DOCTYPE html>
-<html lang="en">
+---
+layout: default
+title: Video Editor for Churches, Podcasts & Creators
+description: >-
+  Michael Taylor edits sermon clips, short-form, long-form, podcast, promotional,
+  and interview video for creators, churches, and small businesses.
+---
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="Taylor’s Design Media is Michael Taylor’s accessible video editing portfolio for sermon clips, short-form, long-form, podcast, promotional, and interview work.">
-  <meta name="theme-color" content="#100617">
-  <title>Taylor’s Design Media | Video Editor</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/png" href="assets/images/logo-mark.png">
-  <script src="script.js" defer></script>
-</head>
+<section id="top" class="hero" aria-labelledby="page-title">
+  <!-- Reel slot: when a showreel exists, swap this decorative loop for the reel
+       with a poster frame and a play control. See notes in README. -->
+  <video class="hero-video" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+    poster="{{ '/assets/images/hero-poster.jpg' | relative_url }}">
+    <source src="{{ '/assets/video/hero-video.mp4' | relative_url }}" type="video/mp4">
+  </video>
+  <div class="hero-overlay" aria-hidden="true"></div>
+  <button class="hero-motion-toggle" type="button">Pause background video</button>
 
-<body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-
-  <header class="site-header">
-    <nav class="nav container" aria-label="Primary navigation">
-      <a href="#top" class="site-logo">
-        <img src="assets/images/logo-full.png" alt="Taylor’s Design Media">
-      </a>
-
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="primary-navigation">
-        <span>Menu</span>
-      </button>
-
-      <ul class="nav-links" id="primary-navigation">
-        <li><a href="#work">Work</a></li>
-        <li><a href="#services">Services</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
-
-  <main id="main-content" tabindex="-1">
-    <section id="top" class="hero" aria-labelledby="page-title">
-      <video class="hero-video" muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-        <source src="assets/video/hero-video.mp4" type="video/mp4">
-      </video>
-      <div class="hero-overlay" aria-hidden="true"></div>
-      <button class="hero-motion-toggle" type="button" aria-pressed="false">Pause background video</button>
-
-      <div class="container hero-content">
-        <p class="eyebrow hero-reveal hero-reveal-1">Taylor’s Design Media</p>
-        <h1 id="page-title" class="hero-reveal hero-reveal-2">I edit videos that keep the story moving.</h1>
-        <p class="hero-text hero-reveal hero-reveal-3">Short-form, long-form, podcasts, interviews, and promotional
-          edits.</p>
-        <div class="hero-actions hero-reveal hero-reveal-4">
-          <a href="#work" class="btn btn-primary">View my work</a>
-          <a href="#contact" class="text-link">Start a project <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section id="work" class="section portfolio-section" aria-labelledby="work-heading">
-      <div class="container">
-        <div class="section-heading">
-          <p class="eyebrow">Selected Work</p>
-          <h2 id="work-heading">Recent editing work.</h2>
-        </div>
-
-        <div class="work-grid">
-          <article class="work-card">
-            <a class="video-preview" href="https://youtube.com/shorts/3fQs762NWMI" data-video-id="3fQs762NWMI"
-              data-video-title="Sermon Clip Editing" data-video-aspect="portrait">
-              <img src="https://i.ytimg.com/vi/3fQs762NWMI/hqdefault.jpg" alt="" loading="lazy" decoding="async">
-              <span class="preview-shade" aria-hidden="true"></span>
-              <span class="play-button" aria-hidden="true">▶</span>
-              <span class="preview-label">Play Sermon Clip Editing</span>
-            </a>
-            <div class="work-content">
-              <p class="work-category">Church &amp; Ministry</p>
-              <h3>Sermon Clip Editing</h3>
-              <p>Focused short-form editing built around one clear takeaway.</p>
-            </div>
-          </article>
-
-          <article class="work-card">
-            <a class="video-preview" href="https://www.youtube.com/watch?v=cc7Ormfb1AQ" data-video-id="cc7Ormfb1AQ"
-              data-video-title="Informational Video">
-              <img src="assets/images/informational-preview.svg" alt="" loading="lazy" decoding="async">
-              <span class="preview-shade" aria-hidden="true"></span>
-              <span class="play-button" aria-hidden="true">▶</span>
-              <span class="preview-label">Play Informational Video</span>
-            </a>
-            <div class="work-content">
-              <p class="work-category">Informational</p>
-              <h3>Informational Video</h3>
-              <p>Long-form editing focused on pacing, clarity, and flow.</p>
-            </div>
-          </article>
-
-          <article class="work-card">
-            <a class="video-preview" href="https://www.youtube.com/watch?v=XlQ6_4y-pMM" data-video-id="XlQ6_4y-pMM"
-              data-video-title="Promotional Video">
-              <img src="https://i.ytimg.com/vi/XlQ6_4y-pMM/maxresdefault.jpg"
-                data-fallback="https://i.ytimg.com/vi/XlQ6_4y-pMM/hqdefault.jpg" alt="" loading="lazy" decoding="async">
-              <span class="preview-shade" aria-hidden="true"></span>
-              <span class="play-button" aria-hidden="true">▶</span>
-              <span class="preview-label">Play Promotional Video</span>
-            </a>
-            <div class="work-content">
-              <p class="work-category">Promotional</p>
-              <h3>Promotional Video</h3>
-              <p>A concise promo edit with a clear opening and call to action.</p>
-            </div>
-          </article>
-
-          <article class="work-card">
-            <a class="video-preview" href="https://www.youtube.com/watch?v=eLOY-t9ioUI" data-video-id="eLOY-t9ioUI"
-              data-video-title="Podcast Video Editing">
-              <img src="https://i.ytimg.com/vi/eLOY-t9ioUI/maxresdefault.jpg"
-                data-fallback="https://i.ytimg.com/vi/eLOY-t9ioUI/hqdefault.jpg" alt="" loading="lazy" decoding="async">
-              <span class="preview-shade" aria-hidden="true"></span>
-              <span class="play-button" aria-hidden="true">▶</span>
-              <span class="preview-label">Play Podcast Video Editing</span>
-            </a>
-            <div class="work-content">
-              <p class="work-category">Podcast</p>
-              <h3>Podcast Video Editing</h3>
-              <p>Cleaner audio, tighter pacing, and simple supporting graphics.</p>
-            </div>
-          </article>
-
-          <article class="work-card">
-            <a class="video-preview" href="https://www.youtube.com/watch?v=Tf19oRK3UwA" data-video-id="Tf19oRK3UwA"
-              data-video-title="Long-Form Video Editing">
-              <img src="https://i.ytimg.com/vi/Tf19oRK3UwA/maxresdefault.jpg"
-                data-fallback="https://i.ytimg.com/vi/Tf19oRK3UwA/hqdefault.jpg" alt="" loading="lazy" decoding="async">
-              <span class="preview-shade" aria-hidden="true"></span>
-              <span class="play-button" aria-hidden="true">▶</span>
-              <span class="preview-label">Play Long-Form Video Editing</span>
-            </a>
-            <div class="work-content">
-              <p class="work-category">YouTube</p>
-              <h3>Long-Form Video Editing</h3>
-              <p>Long-form editing shaped around pacing and viewer attention.</p>
-            </div>
-          </article>
-
-          <article class="work-card">
-            <a class="video-preview" href="https://www.youtube.com/watch?v=-mmrp1zFUxE" data-video-id="-mmrp1zFUxE"
-              data-video-title="Interview Editing">
-              <img src="https://i.ytimg.com/vi/-mmrp1zFUxE/maxresdefault.jpg"
-                data-fallback="https://i.ytimg.com/vi/-mmrp1zFUxE/hqdefault.jpg" alt="" loading="lazy" decoding="async">
-              <span class="preview-shade" aria-hidden="true"></span>
-              <span class="play-button" aria-hidden="true">▶</span>
-              <span class="preview-label">Play Interview Editing</span>
-            </a>
-            <div class="work-content">
-              <p class="work-category">Interview</p>
-              <h3>Interview Editing</h3>
-              <p>Single-camera interview editing focused on pacing, clarity, and a natural conversation.</p>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="section section-light" aria-labelledby="services-heading">
-      <div class="container services-layout">
-        <div class="section-heading services-heading">
-          <p class="eyebrow">Services</p>
-          <h2 id="services-heading">Simple editing support.</h2>
-        </div>
-
-        <div class="services-list">
-          <article class="service-row">
-            <span>01</span>
-            <h3>Short-Form</h3>
-            <p>Reels, Shorts, and social clips from existing footage.</p>
-          </article>
-          <article class="service-row">
-            <span>02</span>
-            <h3>Long-Form</h3>
-            <p>YouTube, podcasts, interviews, and informational videos.</p>
-          </article>
-          <article class="service-row">
-            <span>03</span>
-            <h3>Repurposing</h3>
-            <p>Finding strong moments in longer videos for new short-form content.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="about" class="section about-section" aria-labelledby="about-heading">
-      <div class="container about-grid">
-        <div>
-          <p class="eyebrow">About</p>
-          <h2 id="about-heading">Thoughtful editing focused on clarity, pacing, and story.</h2>
-        </div>
-        <div class="about-copy">
-          <p>I’m Michael Taylor, a video editor based on the East Coast. I work with creators, churches, podcasts, and
-            small businesses to turn raw footage into polished, engaging video content.</p>
-          <p>My approach is simple: understand the purpose of the video, remove what gets in the way, and shape the edit
-            so the message is clear and easy to follow.</p>
-          <p>Whether I’m editing a short social clip, podcast, interview, promotional video, or long-form project, my
-            goal is to create a final piece that feels intentional, professional, and ready to publish.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
-      <div class="container contact-simple">
-        <p class="eyebrow">Contact</p>
-        <h2 id="contact-heading">Have a project in mind?</h2>
-        <p>Tell me what you’re working on and what kind of edit you need.</p>
-        <a class="btn btn-primary" href="mailto:michaeltaylor82@gmail.com?subject=Video%20Editing%20Project">Email
-          Me</a>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    <div class="container footer-content">
-      <p>© <span id="year">2026</span> Taylor’s Design LLC. Taylor’s Design Media is a service of Taylor’s Design LLC.
-      </p>
-      <nav class="footer-links" aria-label="Footer navigation">
-        <a href="accessibility.html">Accessibility</a>
-        <a href="#top">Back to top</a>
-      </nav>
+  <div class="container hero-content">
+    <p class="eyebrow hero-reveal hero-reveal-1">Taylor's Design Media</p>
+    <h1 id="page-title" class="hero-reveal hero-reveal-2">I edit videos that keep the story moving.</h1>
+    <p class="hero-text hero-reveal hero-reveal-3">Short-form, long-form, podcasts, interviews, and promotional
+      edits.</p>
+    <div class="hero-actions hero-reveal hero-reveal-4">
+      <a href="{{ '/work/' | relative_url }}" class="btn btn-primary">View my work</a>
+      <a href="#contact" class="text-link">Start a project <span aria-hidden="true">&rarr;</span></a>
     </div>
-  </footer>
-</body>
+  </div>
+</section>
 
-</html>
+<section id="work" class="section portfolio-section" aria-labelledby="work-heading">
+  <div class="container">
+    <div class="section-heading">
+      <p class="eyebrow">Selected Work</p>
+      <h2 id="work-heading">Recent editing work.</h2>
+    </div>
+
+    <div class="work-grid">
+      {% assign featured = site.projects | where: "featured", true | sort: "order" %}
+      {% for project in featured limit: 6 %}
+        {% include work-card.html project=project %}
+      {% endfor %}
+    </div>
+
+    {% if site.projects.size > 6 %}
+    <p class="work-grid-more"><a class="text-link" href="{{ '/work/' | relative_url }}">See all {{ site.projects.size }} projects <span aria-hidden="true">&rarr;</span></a></p>
+    {% endif %}
+  </div>
+</section>
+
+<section id="services" class="section section-light" aria-labelledby="services-heading">
+  <div class="container services-layout">
+    <div class="section-heading services-heading">
+      <p class="eyebrow">Services</p>
+      <h2 id="services-heading">Simple editing support.</h2>
+    </div>
+
+    <div class="services-list">
+      <article class="service-row">
+        <span>01</span>
+        <h3>Short-Form</h3>
+        <p>Reels, Shorts, and social clips from existing footage.</p>
+      </article>
+      <article class="service-row">
+        <span>02</span>
+        <h3>Long-Form</h3>
+        <p>YouTube, podcasts, interviews, and informational videos.</p>
+      </article>
+      <article class="service-row">
+        <span>03</span>
+        <h3>Repurposing</h3>
+        <p>Finding strong moments in longer videos for new short-form content.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section about-section" aria-labelledby="about-heading">
+  <div class="container about-grid">
+    <div>
+      <p class="eyebrow">About</p>
+      <h2 id="about-heading">Thoughtful editing focused on clarity, pacing, and story.</h2>
+    </div>
+    <div class="about-copy">
+      <p>I'm Michael Taylor, a video editor based on the East Coast. I work with creators, churches, podcasts, and
+        small businesses to turn raw footage into polished, engaging video content.</p>
+      <p>My approach is simple: understand the purpose of the video, remove what gets in the way, and shape the edit
+        so the message is clear and easy to follow.</p>
+      <p>Whether I'm editing a short social clip, podcast, interview, promotional video, or long-form project, my
+        goal is to create a final piece that feels intentional, professional, and ready to publish.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="section contact-section" aria-labelledby="contact-heading">
+  <div class="container contact-simple">
+    <p class="eyebrow">Contact</p>
+    <h2 id="contact-heading">Have a project in mind?</h2>
+    <p>Tell me what you're working on and what kind of edit you need.</p>
+    <a class="btn btn-primary" href="mailto:{{ site.email }}?subject=Video%20Editing%20Project">Email Me</a>
+  </div>
+</section>

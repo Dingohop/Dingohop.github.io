@@ -1,0 +1,26 @@
+{%- assign p = include.project -%}
+{%- if p.thumbnail -%}
+  {%- assign thumb = p.thumbnail | relative_url -%}
+  {%- assign thumb_fallback = "" -%}
+{%- elsif p.aspect == "portrait" -%}
+  {%- assign thumb = "https://i.ytimg.com/vi/" | append: p.video_id | append: "/hqdefault.jpg" -%}
+  {%- assign thumb_fallback = "" -%}
+{%- else -%}
+  {%- assign thumb = "https://i.ytimg.com/vi/" | append: p.video_id | append: "/maxresdefault.jpg" -%}
+  {%- assign thumb_fallback = "https://i.ytimg.com/vi/" | append: p.video_id | append: "/hqdefault.jpg" -%}
+{%- endif -%}
+<article class="work-card" data-category="{{ p.category | slugify }}">
+  <div class="work-card-media{% if p.aspect == 'portrait' %} is-portrait{% endif %}">
+    <img src="{{ thumb }}" {% if thumb_fallback != "" %}data-fallback="{{ thumb_fallback }}"{% endif %} alt="" loading="lazy" decoding="async">
+    <span class="preview-shade" aria-hidden="true"></span>
+    <span class="play-button" aria-hidden="true">&#9654;</span>
+  </div>
+  <div class="work-content">
+    <p class="work-category">{{ p.category }}</p>
+    <h3 class="work-title"><a class="stretched-link" href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+    {% if p.summary %}<p class="work-summary">{{ p.summary }}</p>{% endif %}
+    {% if p.source_length and p.final_length %}
+    <p class="work-ratio"><span class="visually-hidden">Edited from </span>{{ p.source_length }} <span aria-hidden="true">&rarr;</span><span class="visually-hidden"> down to </span> {{ p.final_length }}</p>
+    {% endif %}
+  </div>
+</article>

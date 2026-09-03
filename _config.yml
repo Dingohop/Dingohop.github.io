@@ -1,0 +1,45 @@
+title: Taylor's Design Media
+tagline: Video Editor
+description: >-
+  Video editing portfolio of Michael Taylor. Sermon clips, short-form, long-form,
+  podcast, promotional, and interview editing for creators, churches, and small businesses.
+url: https://taylorsdesignllc.com
+baseurl: ""
+
+author:
+  name: Michael Taylor
+email: michaeltaylor82@gmail.com
+business_name: Taylor's Design LLC
+logo: /assets/images/logo-mark.png
+image: /assets/images/social-card.png
+
+twitter:
+  card: summary_large_image
+
+collections:
+  projects:
+    output: true
+    permalink: /work/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+sass:
+  style: compressed
+
+exclude:
+  - _preview
+  - README.md
+  - ACCESSIBILITY-CHECKLIST.md
+  - Dingohop.github.io.code-workspace
+  - Gemfile
+  - Gemfile.lock
+  - vendor

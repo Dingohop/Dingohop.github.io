@@ -1,0 +1,19 @@
+{%- assign p = include.project -%}
+{%- if p.thumbnail -%}
+  {%- assign thumb = p.thumbnail | relative_url -%}
+{%- elsif p.aspect == "portrait" -%}
+  {%- assign thumb = "https://i.ytimg.com/vi/" | append: p.video_id | append: "/hqdefault.jpg" -%}
+{%- else -%}
+  {%- assign thumb = "https://i.ytimg.com/vi/" | append: p.video_id | append: "/maxresdefault.jpg" -%}
+{%- endif -%}
+<div class="player-slot{% if p.aspect == 'portrait' %} is-portrait{% endif %}">
+  <a class="video-preview" href="https://www.youtube.com/watch?v={{ p.video_id }}"
+     data-video-id="{{ p.video_id }}"
+     data-video-title="{{ p.title | escape }}"
+     data-video-aspect="{{ p.aspect | default: 'landscape' }}">
+    <img src="{{ thumb }}" data-fallback="https://i.ytimg.com/vi/{{ p.video_id }}/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+    <span class="preview-shade" aria-hidden="true"></span>
+    <span class="play-button" aria-hidden="true">&#9654;</span>
+    <span class="preview-label">Play {{ p.title }}</span>
+  </a>
+</div>
