@@ -12,7 +12,7 @@
      data-video-id="{{ p.video_id }}"
      data-video-title="{{ p.title | escape }}"
      data-video-aspect="{{ p.aspect | default: 'landscape' }}">
-    <img src="{{ thumb }}" data-fallback="https://i.ytimg.com/vi/{{ p.video_id }}/hqdefault.jpg" alt="" loading="lazy" decoding="async">
+    <img src="{{ thumb }}"{% unless p.thumbnail %} data-fallback="https://i.ytimg.com/vi/{{ p.video_id }}/hqdefault.jpg"{% endunless %} alt="" loading="lazy" decoding="async">
     <span class="preview-shade" aria-hidden="true"></span>
     <span class="play-button" aria-hidden="true">&#9654;</span>
     <span class="preview-label">Play {{ p.title }}</span>
