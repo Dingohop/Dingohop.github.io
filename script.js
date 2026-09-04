@@ -7,7 +7,6 @@ const year = document.querySelector('#year');
 const videoPreviews = document.querySelectorAll('.video-preview');
 const fallbackImages = document.querySelectorAll('img[data-fallback]');
 const hero = document.querySelector('.hero');
-const heroVideo = document.querySelector('.hero-video');
 const heroMotionToggle = document.querySelector('.hero-motion-toggle');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 const mobileNavigation = window.matchMedia('(max-width: 760px)');
@@ -64,25 +63,16 @@ fallbackImages.forEach((image) => {
   });
 });
 
-/* ---------- Hero background motion ---------- */
+/* ---------- Hero timeline motion ---------- */
 let heroMotionPaused = reducedMotion.matches;
 
 const applyHeroMotionPreference = () => {
-  if (!heroVideo || !hero || !heroMotionToggle) {
+  if (!hero || !heroMotionToggle) {
     return;
   }
 
   hero.classList.toggle('motion-paused', heroMotionPaused);
-  heroMotionToggle.textContent = heroMotionPaused ? 'Play background' : 'Pause background';
-
-  if (heroMotionPaused) {
-    heroVideo.pause();
-    return;
-  }
-
-  heroVideo.play().catch(() => {
-    // The poster frame remains visible if autoplay is unavailable.
-  });
+  heroMotionToggle.textContent = heroMotionPaused ? 'Play animation' : 'Pause animation';
 };
 
 applyHeroMotionPreference();
