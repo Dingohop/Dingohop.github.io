@@ -10,7 +10,7 @@ featured: true
 video_id:
 aspect: landscape
 
-client: DICC Media
+client: Destiny International Christian Center
 completed:
 source_length: ~20 hrs across 30 files
 final_length: 28-41 min per episode
