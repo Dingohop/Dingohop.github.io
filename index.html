@@ -2,8 +2,8 @@
 layout: default
 title: Video Editor for Churches, Podcasts & Creators
 description: >-
-  Michael Taylor edits sermon clips, short-form, long-form, podcast, promotional,
-  and interview video for creators, churches, and small businesses.
+  Michael Taylor edits sermon clips, short-form, long-form, podcast, promotional
+  and interview video for creators, churches and small businesses.
 ---
 
 <section id="top" class="hero" aria-labelledby="page-title">
@@ -12,16 +12,16 @@ description: >-
     <source src="{{ '/assets/video/hero-video.mp4' | relative_url }}" type="video/mp4">
   </video>
   <div class="hero-overlay" aria-hidden="true"></div>
-  <button class="hero-motion-toggle" type="button">Pause background video</button>
+  <button class="hero-motion-toggle" type="button">Pause background</button>
 
   <div class="container hero-content">
-    <p class="eyebrow hero-reveal hero-reveal-1">Taylor's Design Media</p>
-    <h1 id="page-title" class="hero-reveal hero-reveal-2">I edit videos that keep the story moving.</h1>
-    <p class="hero-text hero-reveal hero-reveal-3">Short-form, long-form, podcasts, interviews, and promotional
-      edits.</p>
+    <p class="eyebrow hero-reveal hero-reveal-1">Video Editor &middot; East Coast</p>
+    <h1 id="page-title" class="hero-reveal hero-reveal-2">Cuts that hold attention.</h1>
+    <p class="hero-text hero-reveal hero-reveal-3">Sermon clips, podcasts, interviews and long-form, for creators,
+      churches and small businesses.</p>
     <div class="hero-actions hero-reveal hero-reveal-4">
-      <a href="#work" class="btn btn-primary">View my work</a>
-      <a href="#contact" class="text-link">Start a project <span aria-hidden="true">&rarr;</span></a>
+      <a href="#work" class="btn btn-primary">View the work</a>
+      <a href="#contact" class="btn btn-ghost">Start a project</a>
     </div>
   </div>
 </section>
@@ -30,7 +30,8 @@ description: >-
   <div class="container">
     <div class="section-heading">
       <p class="eyebrow">Selected Work</p>
-      <h2 id="work-heading">Recent editing work.</h2>
+      <h2 id="work-heading">Recent work.</h2>
+      <p>Each piece lists what came in, what went out, and what it was cut in.</p>
     </div>
 
     {% assign categories = site.projects | map: "category" | uniq | sort %}
@@ -56,46 +57,51 @@ description: >-
   </div>
 </section>
 
-<section id="services" class="section section-light" aria-labelledby="services-heading">
-  <div class="container services-layout">
-    <div class="section-heading services-heading">
+<section id="services" class="section services-section" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="section-heading">
       <p class="eyebrow">Services</p>
-      <h2 id="services-heading">Simple editing support.</h2>
+      <h2 id="services-heading">What I cut.</h2>
     </div>
 
     <div class="services-list">
       <article class="service-row">
-        <span>01</span>
-        <h3>Short-Form</h3>
-        <p>Reels, Shorts, and social clips from existing footage.</p>
+        <span>01 &mdash; Short-Form</span>
+        <h3>Reels, Shorts and social clips</h3>
+        <p>Pulled from footage you already have, built around one clear idea.</p>
       </article>
       <article class="service-row">
-        <span>02</span>
-        <h3>Long-Form</h3>
-        <p>YouTube, podcasts, interviews, and informational videos.</p>
+        <span>02 &mdash; Long-Form</span>
+        <h3>YouTube, podcasts and interviews</h3>
+        <p>Cut for pacing, so a long runtime never feels like one.</p>
       </article>
       <article class="service-row">
-        <span>03</span>
-        <h3>Repurposing</h3>
-        <p>Finding strong moments in longer videos for new short-form content.</p>
+        <span>03 &mdash; Repurposing</span>
+        <h3>One recording, many cuts</h3>
+        <p>Mining long footage for the moments that stand on their own.</p>
       </article>
     </div>
   </div>
 </section>
 
-<section id="about" class="section about-section" aria-labelledby="about-heading">
+<section id="about" class="section" aria-labelledby="about-heading">
   <div class="container about-grid">
     <div>
       <p class="eyebrow">About</p>
-      <h2 id="about-heading">Thoughtful editing focused on clarity, pacing, and story.</h2>
+      <h2 id="about-heading">Most of the work is invisible on purpose.</h2>
     </div>
     <div class="about-copy">
-      <p>I'm Michael Taylor, a video editor based on the East Coast. I work with creators, churches, podcasts, and
-        small businesses to turn raw footage into polished, engaging video content.</p>
-      <p>My approach is simple: understand the purpose of the video, remove what gets in the way, and shape the edit
-        so the message is clear and easy to follow.</p>
-      <p>Whether I'm editing a short social clip, podcast, interview, promotional video, or long-form project, my
-        goal is to create a final piece that feels intentional, professional, and ready to publish.</p>
+      <p>I'm Michael Taylor. I edit video from the East Coast for creators, churches, podcasts and small businesses,
+        turning raw footage into something ready to publish.</p>
+      <p>The approach is the same every time: work out what the video is actually for, cut what gets in the way, and
+        shape the pacing so the point lands. The dead air you never sat through, the pause that got tightened, the
+        audio you never noticed was fixed &mdash; that's the job.</p>
+
+      <dl class="about-facts">
+        <div class="spec-row"><dt>Based</dt><dd>East Coast, US</dd></div>
+        <div class="spec-row"><dt>Cutting in</dt><dd>DaVinci Resolve, Premiere Pro</dd></div>
+        <div class="spec-row"><dt>Formats</dt><dd>Short-form, long-form, podcast, interview, promo</dd></div>
+      </dl>
     </div>
   </div>
 </section>
@@ -103,8 +109,9 @@ description: >-
 <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
   <div class="container contact-simple">
     <p class="eyebrow">Contact</p>
-    <h2 id="contact-heading">Have a project in mind?</h2>
+    <h2 id="contact-heading">Have something to cut?</h2>
     <p>Tell me what you're working on and what kind of edit you need.</p>
-    <a class="btn btn-primary" href="mailto:{{ site.email }}?subject=Video%20Editing%20Project">Email Me</a>
+    <a class="btn btn-primary" href="mailto:{{ site.email }}?subject=Video%20Editing%20Project">Email me</a>
+    <span class="contact-mail">or <a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
   </div>
 </section>

@@ -73,7 +73,7 @@ const applyHeroMotionPreference = () => {
   }
 
   hero.classList.toggle('motion-paused', heroMotionPaused);
-  heroMotionToggle.textContent = heroMotionPaused ? 'Play background video' : 'Pause background video';
+  heroMotionToggle.textContent = heroMotionPaused ? 'Play background' : 'Pause background';
 
   if (heroMotionPaused) {
     heroVideo.pause();

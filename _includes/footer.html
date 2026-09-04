@@ -1,8 +1,9 @@
 <footer class="footer">
   <div class="container footer-content">
-    <p>&copy; <span id="year">{{ 'now' | date: "%Y" }}</span> {{ site.business_name }}. {{ site.title }} is a service of {{ site.business_name }}.</p>
+    <p>&copy; <span id="year">{{ 'now' | date: "%Y" }}</span> {{ site.business_name }} &middot; {{ site.title }}</p>
     <nav class="footer-links" aria-label="Footer navigation">
       <a href="{{ '/accessibility/' | relative_url }}">Accessibility</a>
+      <a href="mailto:{{ site.email }}">Email</a>
       <a href="#main-content">Back to top</a>
     </nav>
   </div>
