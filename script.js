@@ -174,14 +174,44 @@ if (filterChips.length && projectRows.length) {
       if (filterStatus) {
         const label = filter === 'all' ? 'all categories' : chip.textContent.trim();
         filterStatus.textContent = `Showing ${shown} ${shown === 1 ? 'project' : 'projects'} in ${label}.`;
-        const firstVisible = document.querySelector('#project-list .project-row:not([hidden])');
-        if (firstVisible) {
-          firstVisible.classList.add('is-first-visible');
-        }
-        projectRows.forEach((row) => {
-          if (row !== firstVisible) { row.classList.remove('is-first-visible'); }
-        });
       }
     });
+  });
+}
+
+/* ---------- Contact form ---------- */
+/* Static host, so there is no server to post to. The form composes a
+   structured email instead, which is the "template" that lands in the
+   inbox. Swap this for a real endpoint later without touching the markup. */
+const contactForm = document.querySelector('#contact-form');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const to = contactForm.dataset.mailto;
+    if (!to) {
+      return;
+    }
+
+    const value = (name) => {
+      const field = contactForm.elements[name];
+      return field ? field.value.trim() : '';
+    };
+
+    const name = value('name');
+    const type = value('type');
+    const subject = `Video project: ${type}`;
+    const body = [
+      `Name: ${name}`,
+      `Email: ${value('email')}`,
+      `Project type: ${type}`,
+      '',
+      value('details'),
+      ''
+    ].join('\n');
+
+    window.location.href =
+      `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   });
 }

@@ -12,9 +12,9 @@ description: >-
 
   <div class="container hero-content">
     <p class="eyebrow hero-reveal hero-reveal-1">Video Editor &middot; East Coast</p>
-    <h1 id="page-title" class="hero-reveal hero-reveal-2">Cuts that hold attention.</h1>
-    <p class="hero-text hero-reveal hero-reveal-3">Sermon clips, podcasts, interviews and long-form, for creators,
-      churches and small businesses.</p>
+    <h1 id="page-title" class="hero-reveal hero-reveal-2">I cut video that keeps people watching.</h1>
+    <p class="hero-text hero-reveal hero-reveal-3">Short clips, podcasts, interviews, long YouTube edits. I work with
+      creators, churches and small businesses.</p>
     <div class="hero-actions hero-reveal hero-reveal-4">
       <a href="#work" class="btn btn-primary">View the work</a>
       <a href="#contact" class="btn btn-ghost">Start a project</a>
@@ -50,7 +50,7 @@ description: >-
     <div class="section-heading">
       <p class="eyebrow">Selected Work</p>
       <h2 id="work-heading">Recent work.</h2>
-      <p>Each piece lists what came in, what went out, and what it was cut in.</p>
+      <p>Where I have the numbers, I've put them in. How much footage came in, how much went out.</p>
     </div>
 
     {% assign categories = site.projects | map: "category" | uniq | sort %}
@@ -85,19 +85,19 @@ description: >-
 
     <div class="services-list">
       <article class="service-row">
-        <span>01 &mdash; Short-Form</span>
-        <h3>Reels, Shorts and social clips</h3>
-        <p>Pulled from footage you already have, built around one clear idea.</p>
+        <span>01 / Short-Form</span>
+        <h3>Reels, Shorts, TikToks</h3>
+        <p>Usually cut down from footage you've already shot. One idea per clip.</p>
       </article>
       <article class="service-row">
-        <span>02 &mdash; Long-Form</span>
-        <h3>YouTube, podcasts and interviews</h3>
-        <p>Cut for pacing, so a long runtime never feels like one.</p>
+        <span>02 / Long-Form</span>
+        <h3>YouTube, podcasts, interviews</h3>
+        <p>Most of the work here is pacing. A good hour shouldn't feel like an hour.</p>
       </article>
       <article class="service-row">
-        <span>03 &mdash; Repurposing</span>
-        <h3>One recording, many cuts</h3>
-        <p>Mining long footage for the moments that stand on their own.</p>
+        <span>03 / Repurposing</span>
+        <h3>One recording, several cuts</h3>
+        <p>You've got a long recording with good moments buried in it. I go find them.</p>
       </article>
     </div>
   </div>
@@ -107,14 +107,15 @@ description: >-
   <div class="container about-grid">
     <div>
       <p class="eyebrow">About</p>
-      <h2 id="about-heading">Most of the work is invisible on purpose.</h2>
+      <h2 id="about-heading">You're not supposed to notice the editing.</h2>
     </div>
     <div class="about-copy">
-      <p>I'm Michael Taylor. I edit video from the East Coast for creators, churches, podcasts and small businesses,
-        turning raw footage into something ready to publish.</p>
-      <p>The approach is the same every time: work out what the video is actually for, cut what gets in the way, and
-        shape the pacing so the point lands. The dead air you never sat through, the pause that got tightened, the
-        audio you never noticed was fixed &mdash; that's the job.</p>
+      <p>I'm Michael Taylor, a video editor on the East Coast. I work with creators, churches, podcasts and small
+        businesses, taking raw footage and turning it into something you can actually post.</p>
+      <p>Every project starts the same way. I work out what the video is for, then cut whatever gets in the way of
+        that. After that it's mostly pacing.</p>
+      <p>If I've done it right you won't notice any of it. You won't sit through the dead air, because it isn't there
+        any more. You won't hear the room noise under the audio. That's the job.</p>
 
       <dl class="about-facts">
         <div class="spec-row"><dt>Based</dt><dd>East Coast, US</dd></div>
@@ -126,11 +127,47 @@ description: >-
 </section>
 
 <section id="contact" class="section contact-section" aria-labelledby="contact-heading">
-  <div class="container contact-simple">
-    <p class="eyebrow">Contact</p>
-    <h2 id="contact-heading">Have something to cut?</h2>
-    <p>Tell me what you're working on and what kind of edit you need.</p>
-    <a class="btn btn-primary" href="mailto:{{ site.email }}?subject=Video%20Editing%20Project">Email me</a>
-    <span class="contact-mail">or <a href="mailto:{{ site.email }}">{{ site.email }}</a></span>
+  <div class="container contact-layout">
+    <div class="contact-intro">
+      <p class="eyebrow">Contact</p>
+      <h2 id="contact-heading">Have something to cut?</h2>
+      <p>Tell me a bit about the project and I'll get back to you.</p>
+    </div>
+
+    <form class="contact-form" id="contact-form" data-mailto="{{ site.email }}">
+      <div class="field">
+        <label for="cf-name">Your name</label>
+        <input id="cf-name" name="name" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="cf-email">Your email</label>
+        <input id="cf-email" name="email" type="email" autocomplete="email" required>
+      </div>
+
+      <div class="field">
+        <label for="cf-type">What kind of edit</label>
+        <select id="cf-type" name="type">
+          <option>Short-form or social clips</option>
+          <option>Long-form or YouTube</option>
+          <option>Podcast</option>
+          <option>Interview</option>
+          <option>Promo or commercial</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="cf-details">What are you working on?</label>
+        <textarea id="cf-details" name="details" rows="5" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Email me</button>
+      <p class="contact-note">This opens your email app with the details already filled in.</p>
+    </form>
+
+    <noscript>
+      <p class="contact-note">Email me at <a href="mailto:{{ site.email }}">{{ site.email }}</a>.</p>
+    </noscript>
   </div>
 </section>
