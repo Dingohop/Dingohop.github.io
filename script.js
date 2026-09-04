@@ -107,6 +107,22 @@ videoPreviews.forEach((preview) => {
     const slot = preview.closest('.player-slot') || preview.parentElement;
     const title = preview.dataset.videoTitle || 'Video project';
 
+    // A second tap used to build a second autoplaying iframe on top of the first.
+    if (slot.querySelector('.player-shell')) {
+      return;
+    }
+
+    // One player at a time. Otherwise every card can be left playing at once
+    // and there is no obvious way to stop them.
+    document.querySelectorAll('.player-shell').forEach((open) => {
+      const openSlot = open.parentElement;
+      open.remove();
+      const hiddenPreview = openSlot && openSlot.querySelector('.video-preview');
+      if (hiddenPreview) {
+        hiddenPreview.hidden = false;
+      }
+    });
+
     const iframe = document.createElement('iframe');
     iframe.className = 'portfolio-player';
     if (preview.dataset.videoAspect === 'portrait') {
