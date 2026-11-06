@@ -592,7 +592,7 @@ h3 {
 .services-section { background: var(--bg-raised); border-block: 1px solid var(--line); }
 .services-list {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 20px;
 }
 .service-row {

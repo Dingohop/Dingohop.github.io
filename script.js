@@ -217,7 +217,7 @@ if (contactForm) {
 
     const name = value('name');
     const type = value('type');
-    const subject = `Video project: ${type}`;
+    const subject = `Project inquiry: ${type}`;
     const body = [
       `Name: ${name}`,
       `Email: ${value('email')}`,
