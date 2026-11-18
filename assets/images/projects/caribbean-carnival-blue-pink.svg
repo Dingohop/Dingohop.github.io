@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description">
+  <title id="title">Caribbean Carnival</title>
+  <desc id="description">Informational video project, with blue and pink accents on a black background.</desc>
+  <defs>
+    <radialGradient id="blue" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(80 20) scale(1100 900)">
+      <stop stop-color="#4DA3FF" stop-opacity=".16"/>
+      <stop offset="1" stop-color="#4DA3FF" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="pink" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1500 40) scale(900 700)">
+      <stop stop-color="#FF6BB5" stop-opacity=".06"/>
+      <stop offset="1" stop-color="#FF6BB5" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0V80" fill="none" stroke="#4DA3FF" stroke-opacity=".045"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="900" fill="#0A0A0B"/>
+  <rect width="1600" height="900" fill="url(#blue)"/>
+  <rect width="1600" height="900" fill="url(#pink)"/>
+  <rect width="1600" height="900" fill="url(#grid)"/>
+  <path d="M96 123H177" fill="none" stroke="#FF6BB5" stroke-width="7"/>
+  <text x="96" y="190" fill="#4DA3FF" font-family="ui-monospace, monospace" font-size="30" font-weight="700">INFORMATIONAL</text>
+  <text x="96" y="290" fill="#FAFAFA" font-family="Arial, sans-serif" font-size="72" font-weight="700">Caribbean</text>
+  <text x="96" y="373" fill="#FAFAFA" font-family="Arial, sans-serif" font-size="72" font-weight="700">Carnival</text>
+</svg>

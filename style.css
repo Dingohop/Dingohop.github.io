@@ -293,6 +293,17 @@ h3 {
   background-image: repeating-linear-gradient(
     115deg, transparent 0 6px, rgba(255,255,255,.028) 6px 12px);
 }
+/* Clip positions live here so the privacy policy can keep blocking inline styles. */
+.tl-clip--1 { left: 0.00%; width: 16.50%; }
+.tl-clip--2 { left: 17.40%; width: 13.20%; }
+.tl-clip--3 { left: 31.30%; width: 25.80%; }
+.tl-clip--4 { left: 57.80%; width: 12.40%; }
+.tl-clip--5 { left: 70.90%; width: 12.00%; }
+.tl-clip--6 { left: 83.60%; width: 16.40%; }
+.tl-clip--7 { left: 21.00%; width: 9.40%; }
+.tl-clip--8 { left: 45.20%; width: 10.60%; }
+.tl-clip--9 { left: 76.80%; width: 12.20%; }
+
 .tl-clip.is-accent {
   background: rgba(var(--accent-rgb), .17);
   border-color: rgba(var(--accent-rgb), .42);
@@ -417,7 +428,8 @@ h3 {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 22px;
-  align-items: start;
+  grid-auto-rows: 1fr;
+  align-items: stretch;
 }
 
 .project-row {
@@ -432,7 +444,7 @@ h3 {
 }
 .project-row:hover { border-color: rgba(var(--highlight-rgb), .45); transform: translateY(-2px); }
 
-.project-row-media { min-width: 0; }
+.project-row-media { min-width: 0; flex-shrink: 0; }
 
 /* uniform 16:9 across the grid; a portrait piece letterboxes inside it
    rather than making one card twice the height of its neighbour */
@@ -533,7 +545,13 @@ h3 {
   color: var(--accent);
 }
 
-.project-row-body { min-width: 0; padding: 22px 22px 24px; }
+.project-row-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  padding: 22px 22px 24px;
+}
 .work-category { display: block; margin-bottom: 10px; color: var(--accent); }
 .project-row-title { margin-bottom: 10px; font-size: 1.3rem; }
 .project-row-summary { margin-bottom: 18px; color: var(--muted); font-size: .97rem; }
@@ -553,7 +571,7 @@ h3 {
 .project-row-writeup p:last-child { margin-bottom: 0; }
 
 .project-row-specs {
-  margin: 0;
+  margin: auto 0 0;
   padding-top: 16px;
   border-top: 1px solid var(--line);
 }

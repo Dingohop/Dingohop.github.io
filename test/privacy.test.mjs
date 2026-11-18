@@ -9,6 +9,12 @@ const read = (file) => fs.readFileSync(new URL(file, root), 'utf8');
 const head = read('_includes/head.html');
 const video = read('_includes/video-embed.html');
 
+test('hero markup works with the policy that blocks inline styles', () => {
+  const hero = read('index.html').match(/<section id="top"[\s\S]*?<\/section>/)?.[0];
+  assert.ok(hero, 'hero section exists');
+  assert.equal([...hero.matchAll(/\sstyle\s*=/gi)].length, 0, 'hero must use external stylesheet rules');
+});
+
 test('production build excludes internal notes, old previews, and test files', () => {
   const excluded = read('_config.yml').split(/^exclude:\s*$/m)[1] ?? '';
   for (const entry of ['AGENTS.md', 'Claude outputs', 'test']) {

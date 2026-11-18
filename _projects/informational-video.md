@@ -7,7 +7,7 @@ featured: true
 video_id: cc7Ormfb1AQ
 aspect: landscape
 # YouTube serves no real frame for this one, so the card uses a made poster
-thumbnail: /assets/images/projects/caribbean-carnival.jpg
+thumbnail: /assets/images/projects/caribbean-carnival-blue-pink.svg
 
 client: Self-initiated
 completed:
