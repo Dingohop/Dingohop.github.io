@@ -9,6 +9,13 @@ const read = (file) => fs.readFileSync(new URL(file, root), 'utf8');
 const head = read('_includes/head.html');
 const video = read('_includes/video-embed.html');
 
+test('production build excludes internal notes, old previews, and test files', () => {
+  const excluded = read('_config.yml').split(/^exclude:\s*$/m)[1] ?? '';
+  for (const entry of ['AGENTS.md', 'Claude outputs', 'test']) {
+    assert.ok(excluded.split('\n').some((line) => line.trim() === `- ${entry}`), entry);
+  }
+});
+
 test('page templates and styles do not load third-party resources', () => {
   const files = ['index.html', '404.html', 'accessibility.html', 'style.css',
     ...['_includes', '_layouts'].flatMap((dir) =>

@@ -11,7 +11,7 @@ author:
   name: Michael Taylor
 email: michaeltaylor82@gmail.com
 business_name: Taylor's Design LLC
-logo: /assets/images/logo-mark.png
+logo: /assets/images/logo-mark-blue.svg
 image: /assets/images/social-card.png
 
 twitter:
@@ -32,6 +32,9 @@ sass:
 
 exclude:
   - _preview
+  - AGENTS.md
+  - Claude outputs
+  - test
   - README.md
   - ACCESSIBILITY-CHECKLIST.md
   - Dingohop.github.io.code-workspace

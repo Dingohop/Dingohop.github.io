@@ -1,28 +1,31 @@
 /* ============================================================
-   Taylor's Design Media - Studio Black
+   Taylor's Design Media - Blue / Black / Pink
    ============================================================ */
 
 :root {
   /* canvas */
   --bg:          #0A0A0B;
-  --bg-raised:   #0F0F11;
-  --surface:     #141416;
-  --surface-2:   #1B1B1F;
+  --bg-raised:   #0F121A;
+  --surface:     #141925;
+  --surface-2:   #1B2333;
 
   /* ink */
   --text:        #FAFAFA;
-  --muted:       #9A9AA3;
-  --muted-dim:   #8A8A94;
+  --muted:       #A1ADC1;
+  --muted-dim:   #93A0B5;
 
   /* brand */
-  --accent:      #F5C542;
-  --accent-hi:   #FFD75E;
+  --accent:      #4DA3FF;
+  --accent-hi:   #7FBDFF;
+  --accent-rgb:  77, 163, 255;
+  --highlight:   #FF6BB5;
+  --highlight-rgb: 255, 107, 181;
   --accent-ink:  #0A0A0B;
-  --accent-wash: rgba(245, 197, 66, .12);
+  --accent-wash: rgba(var(--accent-rgb), .12);
 
   /* structure */
-  --line:        rgba(255, 255, 255, .09);
-  --line-strong: rgba(255, 255, 255, .17);
+  --line:        rgba(var(--accent-rgb), .14);
+  --line-strong: rgba(var(--accent-rgb), .32);
   --radius:      10px;
   --radius-lg:   16px;
 
@@ -81,7 +84,7 @@ a { color: inherit; text-decoration: none; }
 .skip-link:focus { transform: translateY(0); }
 
 :where(a, button, iframe, video, [tabindex]):focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--highlight);
   outline-offset: 3px;
   border-radius: 4px;
 }
@@ -142,7 +145,7 @@ h3 {
   letter-spacing: .1em;
   text-transform: uppercase;
 }
-.eyebrow { margin-bottom: 18px; color: var(--accent); }
+.eyebrow { margin-bottom: 18px; color: var(--highlight); }
 
 .section-heading { max-width: 760px; margin-bottom: 48px; }
 .section-heading p:not(.eyebrow) { margin-bottom: 0; color: var(--muted); font-size: 1.05rem; }
@@ -178,7 +181,7 @@ h3 {
   color: var(--muted);
 }
 .nav-links a { transition: color .18s ease; }
-.nav-links a:hover, .nav-links a:focus-visible { color: var(--text); }
+.nav-links a:hover, .nav-links a:focus-visible { color: var(--highlight); }
 .nav-toggle {
   display: none;
   min-width: 44px; min-height: 44px;
@@ -212,12 +215,12 @@ h3 {
   mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.55) 55%, transparent 92%);
   -webkit-mask-image: linear-gradient(180deg, #000 0%, rgba(0,0,0,.55) 55%, transparent 92%);
 }
-/* warm bloom behind the headline */
+/* Blue light with a smaller pink bloom behind the headline. */
 .hero-glow {
   position: absolute; inset: 0; z-index: -2;
   background:
-    radial-gradient(56% 58% at 6% 4%, rgba(245,197,66,.11), transparent 62%),
-    radial-gradient(46% 52% at 78% 14%, rgba(245,197,66,.05), transparent 65%);
+    radial-gradient(56% 58% at 6% 4%, rgba(var(--accent-rgb), .16), transparent 62%),
+    radial-gradient(46% 52% at 78% 14%, rgba(var(--highlight-rgb), .08), transparent 65%);
 }
 
 .hero-content { padding: 132px 0 52px; }
@@ -291,19 +294,19 @@ h3 {
     115deg, transparent 0 6px, rgba(255,255,255,.028) 6px 12px);
 }
 .tl-clip.is-accent {
-  background: rgba(245, 197, 66, .17);
-  border-color: rgba(245, 197, 66, .42);
+  background: rgba(var(--accent-rgb), .17);
+  border-color: rgba(var(--accent-rgb), .42);
 }
-.tl-track.is-audio .tl-lane { height: 30px; background: rgba(245, 197, 66, .045); }
-.tl-wave { width: 100%; height: 100%; display: block; fill: rgba(245, 197, 66, .55); }
+.tl-track.is-audio .tl-lane { height: 30px; background: rgba(var(--accent-rgb), .045); }
+.tl-wave { width: 100%; height: 100%; display: block; fill: rgba(var(--accent-rgb), .55); }
 
 .tl-playhead {
   position: absolute;
   top: 8px; bottom: 0;
   left: 42px;
   width: 1px;
-  background: var(--accent);
-  box-shadow: 0 0 12px rgba(245, 197, 66, .75);
+  background: var(--highlight);
+  box-shadow: 0 0 12px rgba(var(--highlight-rgb), .65);
   animation: playhead 15s linear infinite;
 }
 .tl-playhead::before {
@@ -311,7 +314,7 @@ h3 {
   position: absolute; top: -1px; left: -4px;
   border-left: 4.5px solid transparent;
   border-right: 4.5px solid transparent;
-  border-top: 6px solid var(--accent);
+  border-top: 6px solid var(--highlight);
 }
 @keyframes playhead {
   from { left: 42px; }
@@ -377,7 +380,7 @@ h3 {
   font-weight: 600;
   transition: gap .18s ease;
 }
-.text-link:hover, .text-link:focus-visible { gap: 12px; color: var(--accent-hi); }
+.text-link:hover, .text-link:focus-visible { gap: 12px; color: var(--highlight); }
 
 /* ---------- Work: filters ---------- */
 
@@ -401,7 +404,7 @@ h3 {
   cursor: pointer;
   transition: color .18s ease, background .18s ease, border-color .18s ease;
 }
-.filter-chip:hover { color: var(--text); border-color: var(--line-strong); }
+.filter-chip:hover { color: var(--highlight); border-color: var(--highlight); }
 .filter-chip.is-active {
   color: var(--accent-ink);
   background: var(--accent);
@@ -427,7 +430,7 @@ h3 {
   overflow: hidden;
   transition: border-color .22s ease, transform .22s ease;
 }
-.project-row:hover { border-color: var(--line-strong); transform: translateY(-2px); }
+.project-row:hover { border-color: rgba(var(--highlight-rgb), .45); transform: translateY(-2px); }
 
 .project-row-media { min-width: 0; }
 
@@ -473,19 +476,19 @@ h3 {
   width: 52px; height: 52px;
   display: grid; place-items: center;
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(255,255,255,.5);
+  border: 1px solid var(--accent);
   border-radius: 50%;
   background: color-mix(in srgb, var(--bg) 55%, transparent);
   backdrop-filter: blur(6px);
-  color: #fff;
+  color: var(--accent);
   font-size: .88rem;
   transition: transform .25s ease, background .25s ease, color .25s ease, border-color .25s ease;
 }
 .video-preview:hover .play-button,
 .video-preview:focus-visible .play-button {
   transform: translate(-50%, -50%) scale(1.06);
-  background: var(--accent);
-  border-color: var(--accent);
+  background: var(--highlight);
+  border-color: var(--highlight);
   color: var(--accent-ink);
 }
 .preview-label {
@@ -603,7 +606,7 @@ h3 {
   transition: border-color .22s ease, transform .22s ease;
 }
 .service-row:hover { border-color: var(--line-strong); transform: translateY(-2px); }
-.service-row span { display: block; margin-bottom: 20px; color: var(--accent); }
+.service-row span { display: block; margin-bottom: 20px; color: var(--highlight); }
 .service-row h3 { margin-bottom: 8px; }
 .service-row p { margin-bottom: 0; color: var(--muted); font-size: .97rem; }
 
@@ -672,14 +675,14 @@ h3 {
 .contact-form input:focus,
 .contact-form select:focus,
 .contact-form textarea:focus {
-  border-color: var(--accent);
+  border-color: var(--highlight);
   background: var(--surface-2);
   outline: none;
 }
 .contact-form input:focus-visible,
 .contact-form select:focus-visible,
 .contact-form textarea:focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--highlight);
   outline-offset: 2px;
 }
 /* stop the browser painting its own pale autofill over a dark field */
@@ -692,7 +695,7 @@ h3 {
   appearance: none;
   -webkit-appearance: none;
   padding-right: 40px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%239A9AA3' stroke-width='1.6'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8' fill='none' stroke='%23A1ADC1' stroke-width='1.6'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 15px center;
   background-size: 12px;
@@ -719,7 +722,7 @@ h3 {
   color: var(--muted);
   transition: color .18s ease;
 }
-.footer a:hover, .footer a:focus-visible { color: var(--accent); }
+.footer a:hover, .footer a:focus-visible { color: var(--highlight); }
 
 /* ---------- Prose pages ---------- */
 
