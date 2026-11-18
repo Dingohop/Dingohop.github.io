@@ -4,8 +4,6 @@ const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 const navAnchors = document.querySelectorAll('.nav-links a');
 const year = document.querySelector('#year');
-const videoPreviews = document.querySelectorAll('.video-preview');
-const fallbackImages = document.querySelectorAll('img[data-fallback]');
 const hero = document.querySelector('.hero');
 const heroMotionToggle = document.querySelector('.hero-motion-toggle');
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
@@ -52,17 +50,6 @@ if (navToggle && navLinks) {
   mobileNavigation.addEventListener('change', () => closeNavigation());
 }
 
-/* ---------- Thumbnail fallbacks ---------- */
-fallbackImages.forEach((image) => {
-  image.addEventListener('error', () => {
-    const fallback = image.dataset.fallback;
-
-    if (fallback && image.src !== fallback) {
-      image.src = fallback;
-    }
-  });
-});
-
 /* ---------- Hero timeline motion ---------- */
 let heroMotionPaused = reducedMotion.matches;
 
@@ -87,74 +74,6 @@ if (heroMotionToggle) {
 reducedMotion.addEventListener('change', (event) => {
   heroMotionPaused = event.matches;
   applyHeroMotionPreference();
-});
-
-/* ---------- Click-to-load video players ---------- */
-videoPreviews.forEach((preview) => {
-  preview.addEventListener('click', (event) => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) {
-      return;
-    }
-
-    const videoId = preview.dataset.videoId;
-
-    if (!videoId) {
-      return;
-    }
-
-    event.preventDefault();
-
-    const slot = preview.closest('.player-slot') || preview.parentElement;
-    const title = preview.dataset.videoTitle || 'Video project';
-
-    // A second tap used to build a second autoplaying iframe on top of the first.
-    if (slot.querySelector('.player-shell')) {
-      return;
-    }
-
-    // One player at a time. Otherwise every card can be left playing at once
-    // and there is no obvious way to stop them.
-    document.querySelectorAll('.player-shell').forEach((open) => {
-      const openSlot = open.parentElement;
-      open.remove();
-      const hiddenPreview = openSlot && openSlot.querySelector('.video-preview');
-      if (hiddenPreview) {
-        hiddenPreview.hidden = false;
-      }
-    });
-
-    const iframe = document.createElement('iframe');
-    iframe.className = 'portfolio-player';
-    if (preview.dataset.videoAspect === 'portrait') {
-      iframe.classList.add('is-portrait');
-    }
-    iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0&playsinline=1&cc_load_policy=1&hl=en`;
-    iframe.title = `${title} player`;
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    iframe.allowFullscreen = true;
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.tabIndex = 0;
-
-    const closeButton = document.createElement('button');
-    closeButton.type = 'button';
-    closeButton.className = 'player-close';
-    closeButton.textContent = 'Close video';
-
-    const shell = document.createElement('div');
-    shell.className = 'player-shell';
-    shell.append(iframe, closeButton);
-
-    preview.hidden = true;
-    slot.append(shell);
-
-    closeButton.addEventListener('click', () => {
-      shell.remove();
-      preview.hidden = false;
-      preview.focus();
-    });
-
-    iframe.addEventListener('load', () => iframe.focus(), { once: true });
-  });
 });
 
 /* ---------- Category filtering on the work index ---------- */
