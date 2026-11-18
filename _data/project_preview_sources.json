@@ -1,0 +1,58 @@
+{
+  "sermon-clip-editing": {
+    "image": "/assets/images/projects/sermon-clip-editing-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "linked-video thumbnail",
+    "source_url": "https://i.ytimg.com/vi/3fQs762NWMI/maxresdefault.jpg",
+    "video_id": "3fQs762NWMI"
+  },
+  "informational-video": {
+    "image": "/assets/images/projects/caribbean-carnival-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "linked-video thumbnail",
+    "source_url": "https://i.ytimg.com/vi/cc7Ormfb1AQ/hqdefault.jpg",
+    "video_id": "cc7Ormfb1AQ"
+  },
+  "long-form-video-editing": {
+    "image": "/assets/images/projects/the-chatbox-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "linked-video thumbnail",
+    "source_url": "https://i.ytimg.com/vi/Tf19oRK3UwA/maxresdefault.jpg",
+    "video_id": "Tf19oRK3UwA"
+  },
+  "podcast-video-editing": {
+    "image": "/assets/images/projects/rapture-ready-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "linked-video thumbnail",
+    "source_url": "https://i.ytimg.com/vi/eLOY-t9ioUI/maxresdefault.jpg",
+    "video_id": "eLOY-t9ioUI"
+  },
+  "promotional-video": {
+    "image": "/assets/images/projects/caught-up-together-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "linked-video thumbnail",
+    "source_url": "https://i.ytimg.com/vi/XlQ6_4y-pMM/maxresdefault.jpg",
+    "video_id": "XlQ6_4y-pMM"
+  },
+  "interview-editing": {
+    "image": "/assets/images/projects/maletta-and-farrah-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "linked-video thumbnail",
+    "source_url": "https://i.ytimg.com/vi/-mmrp1zFUxE/maxresdefault.jpg",
+    "video_id": "-mmrp1zFUxE"
+  },
+  "high-achieving-women": {
+    "image": "/assets/images/projects/high-achieving-women-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "still from completed local export",
+    "source_file": "Clients/DICC/High Achieving Women/05_Exports/Brelyn Bowman final.mp4",
+    "elapsed_seconds": 90
+  },
+  "weekly-reset": {
+    "image": "/assets/images/projects/weekly-reset-preview.jpg",
+    "prepared": "2026-11-18",
+    "kind": "still from completed local export",
+    "source_file": "Clients/Maletta/Weekly Reset/05_Exports/Aug Weekly Reset V2.mp4",
+    "elapsed_seconds": 60
+  }
+}

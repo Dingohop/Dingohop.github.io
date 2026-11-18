@@ -6,6 +6,7 @@ order: 4
 featured: true
 video_id: eLOY-t9ioUI
 aspect: landscape
+thumbnail: /assets/images/projects/rapture-ready-preview.jpg
 
 client: VDavis
 completed:

@@ -6,6 +6,7 @@ order: 5
 featured: true
 video_id: Tf19oRK3UwA
 aspect: landscape
+thumbnail: /assets/images/projects/the-chatbox-preview.jpg
 
 client: The Chatbox (own channel)
 completed:

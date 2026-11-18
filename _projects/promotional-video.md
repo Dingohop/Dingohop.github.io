@@ -6,6 +6,7 @@ order: 3
 featured: true
 video_id: XlQ6_4y-pMM
 aspect: landscape
+thumbnail: /assets/images/projects/caught-up-together-preview.jpg
 
 client: VDavis
 completed:

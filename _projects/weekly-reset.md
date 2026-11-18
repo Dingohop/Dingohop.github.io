@@ -7,6 +7,7 @@ featured: true
 
 video_id:
 aspect: landscape
+thumbnail: /assets/images/projects/weekly-reset-preview.jpg
 
 client: Maletta
 completed:

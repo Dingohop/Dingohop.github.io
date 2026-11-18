@@ -9,6 +9,7 @@ featured: true
 # until you paste the YouTube link here.
 video_id:
 aspect: landscape
+thumbnail: /assets/images/projects/high-achieving-women-preview.jpg
 
 client: Destiny International Christian Center
 completed:

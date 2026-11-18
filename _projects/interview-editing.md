@@ -6,6 +6,7 @@ order: 6
 featured: true
 video_id: -mmrp1zFUxE
 aspect: landscape
+thumbnail: /assets/images/projects/maletta-and-farrah-preview.jpg
 
 client: Maletta
 completed:

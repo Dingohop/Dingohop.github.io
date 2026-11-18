@@ -6,6 +6,7 @@ order: 1
 featured: true
 video_id: 3fQs762NWMI
 aspect: portrait
+thumbnail: /assets/images/projects/sermon-clip-editing-preview.jpg
 
 client: Destiny International Christian Center
 completed:

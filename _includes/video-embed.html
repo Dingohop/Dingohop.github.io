@@ -15,6 +15,12 @@
          {% if p.thumbnail %}poster="{{ p.thumbnail | relative_url }}"{% endif %}>
     <source src="{{ p.video_file | relative_url }}" type="video/mp4">
   </video>
+  {%- elsif p.thumbnail -%}
+  <div class="project-image-preview">
+    <img src="{{ p.thumbnail | relative_url }}" alt="" loading="lazy" decoding="async">
+    <span class="preview-shade" aria-hidden="true"></span>
+    <span class="preview-label">Video link to be added</span>
+  </div>
   {%- else -%}
   <div class="video-placeholder">
     <strong>{{ p.title }}</strong>
