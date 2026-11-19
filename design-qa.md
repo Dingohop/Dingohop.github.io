@@ -1,48 +1,40 @@
-# Homepage implementation QA — November 18, 2026
+# Studio carousel QA — November 18, 2026
 
 final result: passed
 
-## Evidence and comparison state
-- Approved visual truth: `_preview/editorial-homepage-2026-11-18/Taylors-Design-Homepage-Concept-Chatbox.png` (856 × 1838).
-- Browser implementation: `_preview/editorial-homepage-2026-11-18/Implementation-Desktop.jpg` (856 × 1985).
-- Combined comparison: `_preview/editorial-homepage-2026-11-18/Mockup-vs-Implementation.png` (1736 × 2025), opened and inspected with both artifacts top-aligned at 856px wide. No image-density scaling was required.
-- Desktop capture: IAB viewport override 871 × 900 CSS pixels; the full-page screenshot excludes the browser's 15px scrollbar. Source has no browser chrome. Both disclosures collapsed, menu closed, root route, dark theme, scroll at top.
-- Mobile capture: `_preview/editorial-homepage-2026-11-18/Implementation-Mobile.jpg` (375 × 2278), viewport override 390 × 844. The 15px scrollbar is excluded. Separate smallest-width check at 320 × 720 and tablet check at 768 × 900; wider desktop at 1280 × 800.
-- Focused browser evidence: `_preview/editorial-homepage-2026-11-18/Keyboard-Focus.jpg`. Header/intro, featured caption, selected tiles, service labels and contact were also read at full size in the desktop/mobile captures. Full comparison is readable; the focus capture separately verifies the expanded-gallery controls.
+## Target and current evidence
+- Selected direction: displayed option 2, Electric Identity, refined in `_preview/studio-carousel-2026-11-18/Selected-Carousel-Concept.png` (1084 × 1451).
+- Later user instructions supersede the mockup: automatic carousel; smaller type and more spacing; faded carousel edges; a single centered “What I do” heading above a centered service grid.
+- Final desktop: `_preview/studio-carousel-2026-11-18/Desktop-Final.jpg` (1265 × 1941), IAB viewport 1280 × 900. Capture excludes the 15px scrollbar, density 1. Root-like route, scroll at top, first three projects, disclosures closed, auto rotation initially enabled.
+- Final phone: `_preview/studio-carousel-2026-11-18/Phone-Final.jpg` (375 × 2263), IAB viewport 390 × 844, density 1. Additional browser checks at 320 × 720 and 768 × 900.
+- Combined source/implementation comparison: `_preview/studio-carousel-2026-11-18/Concept-vs-Implementation.png`, both page images normalized to 1084px width and top-aligned. Opened together to compare composition, content, typography, colors and imagery. The larger vertical gaps, smaller type and centered services are intentional user-directed differences.
+- Focused inspection: carousel end-state and project details checked in the browser; keyboard-focus masking was inspected using the rendered track. Intermediate screenshots with a fixed-position skip-link capture artifact were rejected and replaced by captures at scrollY=0.
 
-## Findings and comparison history
-1. Initial desktop capture (`Implementation-856-v1.jpg`): original logo export's transparent margins made the visible artwork too small and indented (P2). Fixed by cropping only those transparent margins in the image wrapper; embedded artwork and geometry are unchanged. Recaptured as `Implementation-Desktop.jpg`; visible wordmark now aligns with the content and matches the selected scale.
-2. Independent code review found that overflow clipping hid the thumbnail link outline (P2). Added an outer `.player-slot:focus-within` outline. Real Tab navigation from the last filter to the first thumbnail shows the pink outline in `Keyboard-Focus.jpg`; computed outline is solid 2px, RGB(255,107,181).
-3. Review identified an unsupported speaker identity in alt text and the pre-existing 404 portfolio link to an absent `/work/` route. Used a neutral speaker description and corrected the recovery destination to `/#work`. A generated-page route check failed on the old 404 destination and passed after correction.
+## Fidelity and latest edits
+- Typography: system sans, 80px/88px desktop headline, 38px phone headline, readable captions and service descriptions, increased line spacing and breathing room. Contact heading balances its two lines.
+- Layout: full-width studio introduction, consistent project frames, supporting services, About/contact. All eight carousel cards share dimensions; at 320px each measured 273 × 308.16px before the edge inset refinement. Controls fit the narrow screen and the document has no horizontal overflow.
+- Services: “What I do” is one unbroken heading centered above the grid. On desktop the service-content center and page center both measured 640px. Phone heading also centers and the grid becomes one column.
+- Edges: 40px alpha fades on both carousel sides with 24px internal padding; controls remain outside the mask. Keyboard focus removes the mask, confirmed computed mask `none`; forced-color mode also removes it.
+- Colors: flat charcoal #12191D, warm white #F3EFE6, slate #9BB5C3 and dusty rose #DCA6B0. Calculated contrast: warm white on charcoal 15.48:1; slate on charcoal 8.28:1; rose on charcoal 8.56:1; dark hero text on slate 8.35:1.
+- Images: original local project previews. Six real YouTube destinations; High Achieving Women and Weekly Reset retain their images and explicitly state that their video link is to be added. No invented playable links.
+- Logo: new studio-color SVG variants preserve original embedded raster bytes and vector paths; prior logo versions remain intact.
+- Content: all eight original project records, metadata disclosures, four service families, approved scope limits and email destination retained.
 
-No actionable P0/P1/P2 findings remain.
+## Functional verification
+- Jekyll build succeeded; 26 tests passed; git diff whitespace check clean. New carousel geometry and autoplay tests were observed failing before implementation, then passing.
+- Browser observed automatic movement, manual Pause, Play and automatic wrapping. Pause persisted with the pointer/focus outside the carousel for more than six seconds. Home/End reached the limits; the end showed 6–8 of 8 and Next was unavailable. Keyboard focus stayed visible.
+- Deterministic timer tests verify the six-second interval, Pause/Play, temporary hover pause, explicit restart after keyboard interaction, reduced-motion initial pause, and no advancement on hidden pages.
+- Browser checked desktop/tablet/phone ranges, all project images loaded, project metadata disclosure, mobile Menu and Escape focus return. No console warnings/errors were observed during checked flows.
+- Live announcements update only after scrolling settles, and are off during automatic rotation. Mouse-only pointer hover avoids touch-generated compatibility-hover pauses; persistent wheel pause is limited to horizontal gestures.
+- Existing CSP, no-referrer video links, local resource loading, no scripted network calls and no browser storage passed their checks. Email destination inspected without sending; external playback not tested.
 
-## Required fidelity surfaces
-- **Typography:** Local system sans, white headings, readable body and ordinary blue underlined links. The title/role hierarchy and short captions match the target. No decorative mono labels, extreme tracking, text clipping or cramped service names. Mobile headings and biography reflow naturally.
-- **Spacing/layout:** Same compact intro → featured edit → two selected projects → four services → About → email contact. Flat unboxed sections, square images, consistent gutters. The two selected cards are equal height: 559 × 400.98 at wide desktop and 342 × 252.52 at the 390px phone check. No horizontal overflow at 320, 390, 768 or 1280px.
-- **Colors/tokens:** Flat #0A0A0B, #FAFAFA text, #4DA3FF links, #FF6BB5 logo/focus accents. No glow, gradients, timeline ornament or background grids. Muted secondary text remains readable.
-- **Image quality:** Actual existing project JPGs and approved original SVG logo are used. Rapture Ready, Sermon Clip Editing and The Chatbox are the correct subjects. The generated mockup approximated and recropped the source thumbnails; implementation deliberately preserves the real images, including the sermon thumbnail's portrait layout and Chatbox gameplay. No generated approximations replace portfolio evidence.
-- **Copy/content:** Approved introduction, captions, all four service families, About and email call to action are present. Existing service scope/delivery limits and all eight project records remain available. No invented clients, metrics or promises.
+## Review and limitations
+- Independent read-only review completed, with a follow-up for the user-added autoplay requirements. Fixed live-region churn, unnamed generic groups, missing title guard, stale maintenance instructions, touch-hover event handling and vertical-wheel pause handling. No deferred review findings.
+- Physical touch devices, spoken screen-reader output and an actual OS Reduce Motion toggle were not tested; their code paths and timing behavior are covered by inspection/unit checks. Native scroll fallback exists without JavaScript, but no separate JS-disabled browser run was performed.
+- No actionable P0/P1/P2 findings remain for the checked states. Nothing committed, pushed or published by the agent. Local preview remains available for review.
 
-## Intentional functional differences from the static mockup
-- Native “View all eight projects” disclosure exposes the existing complete portfolio and filters on the same page, without creating a route. It is operable without JavaScript; filtering is hidden until JavaScript runs.
-- A secondary service disclosure retains the previously approved client-supplied and delivery boundaries.
-- Footer retains copyright and accessibility/email/back-to-top links. These two additions account for extra page length after the services section.
-- Mobile uses a Menu button and stacked project/service columns; the source was a desktop concept.
+## Subsequent reel readiness audit
+Reviewed the visible twenty-item checklist from Instagram DdqyllFxaba against the current build. Fixed missing social image metadata, an obsolete sharing image and invalid Twitter/X handles; added a recovery-specific meta description. Fresh homepage/carousel/phone/recovery captures and the complete item-by-item results are in `_preview/reel-fixes-2026-11-18/Reel-Review-and-Fixes.md`. Final sharing card is 1200 × 630. All 29 tests passed; no browser console errors in checked flows. Live social previews remain unverified because nothing was published.
 
-## Verification
-- Jekyll build succeeds. Existing informational notices about Bundler's temporary home and optional Faraday retry middleware remain; no dependencies installed.
-- Node test suite: 19 passed, 0 failed. New rendered-page checks observed failing before implementation; recovery-link test observed failing before its correction.
-- Browser: featured and selected thumbnails load; full disclosure reveals eight projects; YouTube filter shows The Chatbox and Weekly Reset; All restores eight; mobile menu opens/closes, closes on Services navigation and Escape returns focus to Menu; service scope opens and closes.
-- Contact `mailto:` destination and generic project subject inspected; no email was sent. YouTube destinations/no-referrer attributes inspected; external video playback was not tested.
-- Browser console: no warnings or errors during checked flows. Privacy checks confirm no external page assets, embeds, browser storage or scripted network calls; original CSP remains intact.
-- Native no-JavaScript disclosure structure is covered by rendered-output checks; the browser was not separately run with JavaScript disabled. Other browsers and assistive technologies were not tested.
-- Independent read-only code review completed; all reported issues addressed. No deferred code-review findings.
-- Nothing committed, pushed or published. Work remains on local branch `codex/editorial-homepage`.
-
-## Implementation checklist
-- [x] Approved layout and Chatbox selected tile applied.
-- [x] Actual source assets, service scope, portfolio records and privacy controls preserved.
-- [x] Responsive and primary interaction checks passed.
-- [x] Material comparison/review findings fixed and recaptured.
-- [x] Final build, tests and whitespace check passed.
+## Larger services separator
+At the user's request, “What I do” is now 76px on desktop, 64px on intermediate screens and 50px on phones, with more surrounding space. It remains centered on one line. Browser checked at 1280px and 320px; no horizontal overflow. The accepted section screenshot is `_preview/studio-carousel-2026-11-18/Services-Heading-Larger.jpg`. Build succeeded and all 29 tests passed; no publishing performed.

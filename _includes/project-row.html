@@ -1,32 +1,41 @@
 {%- assign p = include.project -%}
 {%- assign rendered = p.content | markdownify -%}
 {%- assign writeup = rendered | strip_html | strip -%}
-<article class="project-row" data-category="{{ p.category | slugify }}" id="project-{{ p.title | slugify }}">
-
+<article class="project-row carousel-slide" id="project-{{ p.title | slugify }}" data-project-title="{{ p.title | escape }}" role="group" aria-roledescription="slide" aria-label="{{ p.title | escape }}">
   <div class="project-row-media">
-    {% include video-embed.html project=p %}
-  </div>
-
-  <div class="project-row-body">
-    <p class="work-category">{{ p.category }}</p>
-    <h3 class="project-row-title">{{ p.title }}</h3>
-    {% if p.summary %}<p class="project-row-summary">{{ p.summary }}</p>{% endif %}
-
-    {% if writeup != '' %}
-    <div class="project-row-writeup prose">{{ rendered }}</div>
+    {% if p.video_id %}
+    <a class="video-preview" href="https://www.youtube.com/watch?v={{ p.video_id | escape }}"
+       target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer"
+       aria-label="Watch {{ p.title | escape }} on YouTube (opens in a new tab)">
+      <img src="{{ p.thumbnail | relative_url }}" alt="" width="1280" height="720" loading="lazy" decoding="async">
+    </a>
+    {% else %}
+    <div class="project-image-preview">
+      <img src="{{ p.thumbnail | relative_url }}" alt="" width="1280" height="720" loading="lazy" decoding="async">
+    </div>
     {% endif %}
-
-    {%- capture specs -%}
-      {% if p.client %}<div class="spec-row"><dt>Client</dt><dd>{{ p.client }}</dd></div>{% endif %}
-      {% if p.completed %}<div class="spec-row"><dt>Completed</dt><dd>{{ p.completed }}</dd></div>{% endif %}
-      {% if p.source_length %}<div class="spec-row"><dt>Source</dt><dd>{{ p.source_length }}</dd></div>{% endif %}
-      {% if p.final_length %}<div class="spec-row"><dt>Runtime</dt><dd>{{ p.final_length }}</dd></div>{% endif %}
-      {% if p.deliverables %}<div class="spec-row"><dt>Deliverables</dt><dd>{{ p.deliverables }}</dd></div>{% endif %}
-      {% if p.tools %}<div class="spec-row"><dt>Tools</dt><dd>{{ p.tools | join: ", " }}</dd></div>{% endif %}
-      {% if p.skills %}<div class="spec-row"><dt>Focus</dt><dd>{{ p.skills | join: ", " }}</dd></div>{% endif %}
-    {%- endcapture -%}
-    {%- assign specs_trimmed = specs | strip -%}
-    {% if specs_trimmed != '' %}<dl class="project-row-specs">{{ specs }}</dl>{% endif %}
   </div>
-
+  <div class="project-row-body">
+    <h3 class="project-row-title">{{ p.title }}</h3>
+    <p class="work-category">{% if p.title == 'Rapture Ready' %}Podcast edit &middot; {{ p.client }}{% else %}{{ p.category }}{% endif %}</p>
+    {% unless p.video_id %}<p class="preview-availability">Video link to be added</p>{% endunless %}
+    <details class="project-details">
+      <summary>Editing details</summary>
+      <div class="project-detail-copy">
+        {% if p.summary %}<p>{{ p.summary }}</p>{% endif %}
+        {% if writeup != '' %}<div class="project-row-writeup prose">{{ rendered }}</div>{% endif %}
+        {%- capture specs -%}
+          {% if p.client %}<div class="spec-row"><dt>Client</dt><dd>{{ p.client }}</dd></div>{% endif %}
+          {% if p.completed %}<div class="spec-row"><dt>Completed</dt><dd>{{ p.completed }}</dd></div>{% endif %}
+          {% if p.source_length %}<div class="spec-row"><dt>Source</dt><dd>{{ p.source_length }}</dd></div>{% endif %}
+          {% if p.final_length %}<div class="spec-row"><dt>Runtime</dt><dd>{{ p.final_length }}</dd></div>{% endif %}
+          {% if p.deliverables %}<div class="spec-row"><dt>Deliverables</dt><dd>{{ p.deliverables }}</dd></div>{% endif %}
+          {% if p.tools %}<div class="spec-row"><dt>Tools</dt><dd>{{ p.tools | join: ", " }}</dd></div>{% endif %}
+          {% if p.skills %}<div class="spec-row"><dt>Focus</dt><dd>{{ p.skills | join: ", " }}</dd></div>{% endif %}
+        {%- endcapture -%}
+        {%- assign specs_trimmed = specs | strip -%}
+        {% if specs_trimmed != '' %}<dl class="project-row-specs">{{ specs }}</dl>{% endif %}
+      </div>
+    </details>
+  </div>
 </article>

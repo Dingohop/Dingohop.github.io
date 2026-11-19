@@ -11,11 +11,19 @@ author:
   name: Michael Taylor
 email: michaeltaylor82@gmail.com
 business_name: Taylor's Design LLC
-logo: /assets/images/logo-mark-blue.svg
-image: /assets/images/social-card.png
+logo: /assets/images/logo-mark-studio.svg
+image: /assets/images/social-card-studio.jpg
 
-twitter:
-  card: summary_large_image
+# jekyll-seo-tag reads page images, including front-matter defaults.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image:
+        path: /assets/images/social-card-studio.jpg
+        width: 1200
+        height: 630
+        alt: "Taylor’s Design Media — video editing, websites and promotional design"
 
 collections:
   projects:

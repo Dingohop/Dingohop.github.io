@@ -6,22 +6,21 @@ import test from 'node:test';
 const root = new URL('../_site/', import.meta.url);
 const html = fs.readFileSync(new URL('index.html', root), 'utf8');
 
-test('the opening features Rapture Ready and the approved two selected edits', () => {
-  const opening = html.split('id="all-projects"')[0];
-  assert.match(opening, /<h1[^>]*>Michael Taylor<\/h1>/);
-  for (const id of ['eLOY-t9ioUI', '3fQs762NWMI', 'Tf19oRK3UwA']) {
-    assert.ok(opening.includes(`https://www.youtube.com/watch?v=${id}`), id);
-  }
-  assert.doesNotMatch(opening, /Caribbean Carnival|hero-timeline|hero-motion-toggle/);
+test('the selected studio opening states the actual service mix', () => {
+  const heading = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
+  assert.equal(heading, 'Video editing. Websites. Promotional design.');
+  assert.doesNotMatch(html, /hero-timeline|hero-motion-toggle/);
 });
 
-test('all eight projects remain reachable in a native disclosure without JavaScript', () => {
-  const gallery = html.match(/<details\b[^>]*id="all-projects"[\s\S]*?<\/details>/)?.[0];
-  assert.ok(gallery, 'A keyboard-accessible native disclosure contains the full portfolio');
-  assert.match(gallery, /<summary[^>]*>[\s\S]*?View all eight projects/);
-  assert.equal([...gallery.matchAll(/<article\b[^>]*class="project-row"/g)].length, 8);
-  assert.match(gallery, /Caribbean Carnival/);
-  assert.match(gallery, /Video link to be added/);
+test('all eight real projects render in the carousel, including previews awaiting links', () => {
+  const titles = [...html.matchAll(/data-project-title="([^"]+)"/g)].map((match) => match[1]);
+  assert.equal(titles.length, 8);
+  assert.equal(new Set(titles).size, 8);
+  assert.deepEqual(titles.slice(0, 3), ['Rapture Ready', 'Sermon Clip Editing', 'The Chatbox']);
+  assert.ok(titles.includes('Caribbean Carnival'));
+  assert.equal((html.match(/Video link to be added/g) ?? []).length, 2);
+  assert.match(html, /aria-roledescription="carousel"/);
+  assert.doesNotMatch(html, /id="all-projects"/);
 });
 
 test('rendered media is local and every external video link protects the referrer', () => {
@@ -30,7 +29,7 @@ test('rendered media is local and every external video link protects the referre
     assert.ok(fs.existsSync(new URL(`.${match[1]}`, root)), match[1]);
   }
   const videoLinks = [...html.matchAll(/<a\b[^>]*href="https:\/\/www\.youtube\.com\/watch\?v=[^"]+"[^>]*>/g)];
-  assert.ok(videoLinks.length >= 9, 'featured, selected and full-gallery links render');
+  assert.equal(videoLinks.length, 6, 'Only the six projects with real video destinations link out');
   for (const [link] of videoLinks) {
     assert.match(link, /target="_blank"/);
     assert.match(link, /rel="noopener noreferrer"/);
