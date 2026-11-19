@@ -37,6 +37,7 @@ exclude:
   - test
   - README.md
   - ACCESSIBILITY-CHECKLIST.md
+  - design-qa.md
   - Dingohop.github.io.code-workspace
   - Gemfile
   - Gemfile.lock
