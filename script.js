@@ -232,8 +232,9 @@ if (carousel) {
     reducedMotion: reducedMotion.matches,
     advance: () => moveTo(0, 1),
     render: (playing) => {
-      toggle.textContent = playing ? 'Pause' : 'Play';
+      toggle.setAttribute('data-playing', String(playing));
       toggle.setAttribute('aria-label', playing ? 'Pause carousel' : 'Play carousel');
+      toggle.setAttribute('title', playing ? 'Pause carousel' : 'Play carousel');
       announcement.setAttribute('aria-live', playing ? 'off' : 'polite');
     },
   });

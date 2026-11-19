@@ -75,7 +75,10 @@ description: >-
       <p class="work-note"><span class="carousel-status" aria-hidden="true">{{ site.projects.size }} projects</span><span>Videos open on YouTube</span></p>
       <span class="carousel-announcement visually-hidden" role="status" aria-live="off" aria-atomic="true">{{ site.projects.size }} projects</span>
       <div class="carousel-controls" role="group" aria-label="Gallery controls">
-        <button class="carousel-toggle" type="button" aria-controls="portfolio-track" aria-label="Pause carousel">Pause</button>
+        <button class="carousel-toggle" type="button" data-playing="true" aria-controls="portfolio-track" aria-label="Pause carousel" title="Pause carousel">
+          <svg class="icon-pause" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg>
+          <svg class="icon-play" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false"><path d="M8 4.5 20 12 8 19.5Z"/></svg>
+        </button>
         <button class="carousel-previous" type="button" aria-controls="portfolio-track" aria-label="Previous projects" aria-disabled="true">Previous</button>
         <button class="carousel-next" type="button" aria-controls="portfolio-track" aria-label="Next projects">Next</button>
       </div>
