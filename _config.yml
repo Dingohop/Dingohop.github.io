@@ -1,9 +1,8 @@
-title: Taylor's Design Media
-tagline: Video, Web and Promotional Design
+title: Michael Taylor
+tagline: Video, Design & Web
 description: >-
-  Taylor's Design provides video editing, informational websites and blogs,
-  promotional design, and website care for churches, small businesses, creators,
-  nonprofits, and other clients.
+  Selected work by Michael Taylor in video editing, design, and web development.
+  A portfolio of completed video projects and web projects in progress.
 url: https://taylorsdesignllc.com
 baseurl: ""
 
@@ -23,7 +22,7 @@ defaults:
         path: /assets/images/social-card-studio.jpg
         width: 1200
         height: 630
-        alt: "Taylor’s Design Media — video editing, websites and promotional design"
+        alt: "Michael Taylor — selected work in video, design, and web development"
 
 collections:
   projects:

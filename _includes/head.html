@@ -10,32 +10,24 @@
 
 <link rel="stylesheet" href="{{ '/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/logo-mark-studio.svg' | relative_url }}">
-<script src="{{ '/script.js' | relative_url }}" defer></script>
+<script src="{{ '/script.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
 
 {% if page.url == '/' %}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Taylor's Design Media",
-  "alternateName": "Taylor's Design LLC",
+  "@type": "ProfilePage",
+  "name": "Michael Taylor — Selected Work",
   "url": "{{ site.url }}",
-  "logo": "{{ '/assets/images/logo-full-studio.svg' | absolute_url }}",
   "image": "{{ '/assets/images/social-card-studio.jpg' | absolute_url }}",
-  "email": "{{ site.email }}",
   "description": {{ site.description | strip_newlines | strip | jsonify }},
-  "founder": {
+  "mainEntity": {
     "@type": "Person",
     "name": "Michael Taylor",
-    "jobTitle": "Creative Services Provider"
-  },
-  "serviceType": [
-    "Video Editing",
-    "Informational Websites and Blogs",
-    "Promotional Design",
-    "Website Care"
-  ],
-  "areaServed": "US"
+    "email": "{{ site.email }}",
+    "url": "{{ site.url }}",
+    "knowsAbout": ["Video editing", "Design", "Web development"]
+  }
 }
 </script>
 {% endif %}

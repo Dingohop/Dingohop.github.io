@@ -47,7 +47,7 @@ if (navToggle && navLinks) {
   mobileNavigation.addEventListener('change', () => closeNavigation());
 }
 
-/* ---------- Manual portfolio carousel ---------- */
+/* ---------- Portfolio carousel ---------- */
 // Shared with the controls: counts and targets stay bounded during touch
 // overscroll, partial scroll positions and responsive column changes.
 function carouselRange({ scrollLeft, clientWidth, scrollWidth, cardWidth, gap, count }) {
@@ -69,6 +69,31 @@ function carouselRange({ scrollLeft, clientWidth, scrollWidth, cardWidth, gap, c
   };
 }
 
+// Reverse at either boundary so automatic rotation never jumps across the track.
+function carouselStep({ first, visible, count, direction = 1 }) {
+  const maximum = Math.max(0, count - visible);
+  const heading = first >= maximum ? -1 : first <= 0 ? 1 : direction;
+  return { index: Math.max(0, Math.min(maximum, first + heading)), direction: heading };
+}
+
+// Time-based easing runs at the display's refresh rate and is cancellable.
+function carouselAnimate({ from, to, duration = 800, render, finish = () => {},
+  requestFrame = (callback) => window.requestAnimationFrame(callback),
+  cancelFrame = (id) => window.cancelAnimationFrame(id) }) {
+  let started;
+  let frame;
+  const tick = (time) => {
+    if (started === undefined) started = time;
+    const progress = Math.min(1, (time - started) / duration);
+    const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+    render(from + (to - from) * eased);
+    if (progress < 1) frame = requestFrame(tick);
+    else { frame = undefined; finish(); }
+  };
+  frame = requestFrame(tick);
+  return () => { if (frame !== undefined) cancelFrame(frame); frame = undefined; };
+}
+
 function carouselAutoplay({ advance, render, reducedMotion = false }) {
   let playing = !reducedMotion;
   let hovering = false;
@@ -80,7 +105,7 @@ function carouselAutoplay({ advance, render, reducedMotion = false }) {
   const schedule = () => {
     clearTimeout(timer);
     if (playing && !hovering && visible && (!focused || explicitFocusPlay)) {
-      timer = setTimeout(() => { advance(); schedule(); }, 6000);
+      timer = setTimeout(() => { advance(); schedule(); }, 3000);
     }
   };
   const sync = () => { render(playing); schedule(); };
@@ -118,6 +143,7 @@ if (carousel) {
   const status = carousel.querySelector('.carousel-status');
   const announcement = carousel.querySelector('.carousel-announcement');
   const toggle = carousel.querySelector('.carousel-toggle');
+  const dots = Array.from(carousel.querySelectorAll('.carousel-dot'));
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   slides.forEach((slide, index) => {
@@ -147,20 +173,48 @@ if (carousel) {
     const positions = range.first === range.last ? `${range.first + 1}` : `${range.first + 1}–${range.last + 1}`;
     const label = range.visible ? `${positions} of ${slides.length}` : '0 projects';
     if (status.textContent !== label) status.textContent = label;
+    const maximum = Math.max(0, slides.length - range.visible);
+    dots.forEach((dot, index) => {
+      dot.hidden = index > maximum;
+      dot.setAttribute('aria-current', String(index === range.first));
+      dot.setAttribute('data-near', String(Math.abs(index - range.first) === 1));
+      const end = Math.min(slides.length, index + range.visible);
+      dot.setAttribute('aria-label', range.visible === 1 ? `Show project ${index + 1} of ${slides.length}` : `Show projects ${index + 1}–${end} of ${slides.length}`);
+    });
   };
 
-  const moveTo = (index, instant = false) => {
+  let cancelAnimation;
+  const stopAnimation = () => {
+    if (cancelAnimation) cancelAnimation();
+    cancelAnimation = undefined;
+    track.classList.remove('is-animating');
+  };
+  const moveTo = (index) => {
+    stopAnimation();
     const { stride } = measure();
-    track.scrollTo({ left: index * stride, behavior: instant || reducedMotion.matches ? 'auto' : 'smooth' });
+    const left = Math.max(0, Math.min(track.scrollWidth - track.clientWidth, index * stride));
+    if (reducedMotion.matches || Math.abs(track.scrollLeft - left) < 1) {
+      track.scrollLeft = left;
+      update();
+      return;
+    }
+    track.classList.add('is-animating');
+    cancelAnimation = carouselAnimate({
+      from: track.scrollLeft, to: left,
+      render: (position) => { track.scrollLeft = position; },
+      finish: () => { stopAnimation(); update(); },
+    });
   };
 
+  let direction = 1;
   const rotation = carouselAutoplay({
     reducedMotion: reducedMotion.matches,
     advance: () => {
       const { range } = measure();
       if (range.visible >= slides.length) return;
-      const wrap = range.atEnd;
-      moveTo(wrap ? 0 : range.first + 1, wrap);
+      const step = carouselStep({ first: range.first, visible: range.visible, count: slides.length, direction });
+      direction = step.direction;
+      moveTo(step.index);
     },
     render: (playing) => {
       toggle.textContent = playing ? 'Pause' : 'Play';
@@ -180,23 +234,38 @@ if (carousel) {
     announcementTimer = setTimeout(announce, 180);
   };
 
-  toggle.addEventListener('click', () => rotation.isPlaying() ? rotation.pause() : rotation.play());
+  toggle.addEventListener('click', () => {
+    if (rotation.isPlaying()) { rotation.pause(); stopAnimation(); }
+    else rotation.play();
+  });
+  dots.forEach((dot, index) => dot.addEventListener('click', () => {
+    rotation.pause();
+    moveTo(index);
+  }));
   carousel.addEventListener('pointerenter', (event) => {
-    if (event.pointerType === 'mouse') rotation.setHover(true);
+    if (event.pointerType === 'mouse') { rotation.setHover(true); stopAnimation(); }
   });
   carousel.addEventListener('pointerleave', (event) => {
     if (event.pointerType === 'mouse') rotation.setHover(false);
   });
-  carousel.addEventListener('focusin', (event) => rotation.focus(event.target === toggle));
+  carousel.addEventListener('focusin', (event) => {
+    rotation.focus(event.target === toggle);
+    stopAnimation();
+  });
   carousel.addEventListener('focusout', (event) => {
     if (!carousel.contains(event.relatedTarget)) rotation.blur();
   });
-  track.addEventListener('pointerdown', () => rotation.pause(), { passive: true });
+  track.addEventListener('pointerdown', () => { rotation.pause(); stopAnimation(); }, { passive: true });
   track.addEventListener('wheel', (event) => {
-    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) rotation.pause();
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) { rotation.pause(); stopAnimation(); }
   }, { passive: true });
-  document.addEventListener('visibilitychange', () => rotation.setVisible(!document.hidden));
-  reducedMotion.addEventListener('change', (event) => { if (event.matches) rotation.pause(); });
+  document.addEventListener('visibilitychange', () => {
+    rotation.setVisible(!document.hidden);
+    if (document.hidden) stopAnimation();
+  });
+  reducedMotion.addEventListener('change', (event) => {
+    if (event.matches) { rotation.pause(); stopAnimation(); }
+  });
 
   previous.addEventListener('click', () => {
     rotation.pause();
@@ -223,7 +292,7 @@ if (carousel) {
     event.preventDefault();
     moveTo(target);
   });
-  window.addEventListener('resize', updateAndSettle);
+  window.addEventListener('resize', () => { stopAnimation(); updateAndSettle(); });
   if (typeof ResizeObserver !== 'undefined') new ResizeObserver(updateAndSettle).observe(track);
   rotation.setVisible(!document.hidden);
   update();

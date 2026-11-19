@@ -6,9 +6,10 @@ import test from 'node:test';
 const root = new URL('../_site/', import.meta.url);
 const html = fs.readFileSync(new URL('index.html', root), 'utf8');
 
-test('the selected studio opening states the actual service mix', () => {
-  const heading = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim();
-  assert.equal(heading, 'Video editing. Websites. Promotional design.');
+test('the portfolio leads with Michael and the featured projects', () => {
+  const heading = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1].replace(/<br\s*\/?\s*>/g, ' ').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  assert.equal(heading, 'Michael Taylor.');
+  assert.match(html, /id="work-heading">Selected work/);
   assert.doesNotMatch(html, /hero-timeline|hero-motion-toggle/);
 });
 
@@ -29,7 +30,8 @@ test('rendered media is local and every external video link protects the referre
     assert.ok(fs.existsSync(new URL(`.${match[1]}`, root)), match[1]);
   }
   const videoLinks = [...html.matchAll(/<a\b[^>]*href="https:\/\/www\.youtube\.com\/watch\?v=[^"]+"[^>]*>/g)];
-  assert.equal(videoLinks.length, 6, 'Only the six projects with real video destinations link out');
+  assert.equal(videoLinks.length, 10, 'Six carousel links and two links for each featured video');
+  assert.equal(new Set(videoLinks.map(([link]) => link.match(/watch\?v=([^"]+)/)[1])).size, 6, 'Only six real video destinations');
   for (const [link] of videoLinks) {
     assert.match(link, /target="_blank"/);
     assert.match(link, /rel="noopener noreferrer"/);
@@ -41,7 +43,7 @@ test('primary navigation resolves and contact uses the configured email', () => 
   for (const match of html.matchAll(/href="\/?#([^"]+)"/g)) {
     assert.ok(html.includes(`id="${match[1]}"`), `Missing anchor: ${match[1]}`);
   }
-  assert.match(html, /href="mailto:michaeltaylor82@gmail\.com\?subject=Project%20inquiry">Email Michael<\/a>/);
+  assert.match(html, /href="mailto:michaeltaylor82@gmail\.com">michaeltaylor82@gmail\.com<\/a>/);
   assert.doesNotMatch(html, /<form\b/);
 });
 

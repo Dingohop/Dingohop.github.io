@@ -2,6 +2,7 @@
 title: Rapture Ready
 category: Podcast
 summary: Cleaner audio, tighter pacing, and simple supporting graphics.
+portfolio_context: An episode edit for VDavis, working from roughly 102 minutes of source material across 42 files.
 order: 4
 featured: true
 video_id: eLOY-t9ioUI

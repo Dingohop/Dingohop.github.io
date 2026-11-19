@@ -2,6 +2,7 @@
 title: Sermon Clip Editing
 category: Church & Ministry
 summary: Focused short-form editing built around one clear takeaway.
+portfolio_context: A 45-second vertical clip drawn from roughly four and a half hours of footage across three services.
 order: 1
 featured: true
 video_id: 3fQs762NWMI

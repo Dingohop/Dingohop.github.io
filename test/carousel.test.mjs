@@ -96,9 +96,9 @@ function autoplayHarness(reducedMotion = false) {
   return { rotation, advanceTime, get moves() { return moves; }, states };
 }
 
-test('autoplay advances every six seconds and Pause/Play controls it', () => {
+test('autoplay advances every three seconds and Pause/Play controls it', () => {
   const h = autoplayHarness();
-  h.advanceTime(5999);
+  h.advanceTime(2999);
   assert.equal(h.moves, 0);
   h.advanceTime(1);
   assert.equal(h.moves, 1);
@@ -106,7 +106,7 @@ test('autoplay advances every six seconds and Pause/Play controls it', () => {
   h.advanceTime(18000);
   assert.equal(h.moves, 1);
   h.rotation.play();
-  h.advanceTime(6000);
+  h.advanceTime(3000);
   assert.equal(h.moves, 2);
 });
 
@@ -116,7 +116,7 @@ test('hover pauses temporarily and keyboard interaction waits for explicit Play'
   h.advanceTime(12000);
   assert.equal(h.moves, 0);
   h.rotation.setHover(false);
-  h.advanceTime(6000);
+  h.advanceTime(3000);
   assert.equal(h.moves, 1);
   h.rotation.focus(false);
   h.rotation.blur();
@@ -124,7 +124,7 @@ test('hover pauses temporarily and keyboard interaction waits for explicit Play'
   assert.equal(h.moves, 1);
   h.rotation.focus(true);
   h.rotation.play();
-  h.advanceTime(6000);
+  h.advanceTime(3000);
   assert.equal(h.moves, 2);
 });
 
@@ -138,6 +138,61 @@ test('reduced motion starts paused and hidden pages never advance', () => {
   h.advanceTime(12000);
   assert.equal(h.moves, 0);
   h.rotation.setVisible(true);
-  h.advanceTime(6000);
+  h.advanceTime(3000);
   assert.equal(h.moves, 1);
+});
+
+// Exercise frame timing rather than relying on a browser's default scroll duration.
+test('carousel transitions ease in and out, finish exactly, and can be interrupted', () => {
+  let sequence = 0;
+  const frames = new Map();
+  const requestFrame = (callback) => { const id = ++sequence; frames.set(id, callback); return id; };
+  const cancelFrame = (id) => frames.delete(id);
+  const tick = (time) => {
+    const callbacks = [...frames.values()];
+    frames.clear();
+    callbacks.forEach((callback) => callback(time));
+  };
+  const values = [];
+  let finished = false;
+  context.carouselAnimate({ from: 0, to: 100, duration: 800,
+    render: (value) => values.push(value), finish: () => { finished = true; },
+    requestFrame, cancelFrame });
+  tick(1000);
+  assert.equal(values.at(-1), 0);
+  tick(1200);
+  assert.ok(values.at(-1) > 0 && values.at(-1) < 25, 'gentle start');
+  tick(1400);
+  assert.ok(Math.abs(values.at(-1) - 50) < .001);
+  tick(1600);
+  assert.ok(values.at(-1) > 75 && values.at(-1) < 100, 'gentle arrival');
+  tick(1800);
+  assert.equal(values.at(-1), 100);
+  assert.ok(finished);
+  assert.equal(frames.size, 0);
+
+  const stop = context.carouselAnimate({ from: 100, to: 0, duration: 800,
+    render: (value) => values.push(value), requestFrame, cancelFrame });
+  tick(2000);
+  tick(2200);
+  const beforeStop = values.at(-1);
+  stop();
+  tick(3000);
+  assert.equal(values.at(-1), beforeStop, 'manual interaction cancels pending movement');
+  assert.equal(frames.size, 0);
+});
+
+test('automatic movement reverses at the ends without jumping across the gallery', () => {
+  let first = 0;
+  let direction = 1;
+  const seen = [];
+  for (let i = 0; i < 12; i += 1) {
+    const step = context.carouselStep({ first, visible: 3, count: 8, direction });
+    first = step.index;
+    direction = step.direction;
+    seen.push(first);
+  }
+  assert.deepEqual(seen, [1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 1, 2]);
+  assert.equal(context.carouselStep({ first: 0, visible: 1, count: 1 }).index, 0);
+  assert.equal(context.carouselStep({ first: 0, visible: 0, count: 0 }).index, 0);
 });
