@@ -1,3 +1,5 @@
+> Archive update — November 19, 2026: historical `_preview/…` evidence paths below are now preserved under `/Volumes/Freelance/Michael Taylor/Taylor's Design/Business/Website Archive/2026-11-19-repository-cleanup/_preview/…`. The current editable sharing-card layout is `design/sharing-card.html`. Current loop QA lives in `_preview/continuous-loop-2026-11-19/`.
+
 # Studio carousel QA — November 18, 2026
 
 final result: passed

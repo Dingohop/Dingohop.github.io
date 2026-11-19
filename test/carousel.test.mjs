@@ -17,46 +17,30 @@ const range = (overrides = {}) => context.carouselRange({
   ...overrides,
 });
 
-test('desktop carousel moves through all eight projects and stops at the ends', () => {
-  const first = range();
-  assert.deepEqual([first.first, first.last, first.previous, first.next], [0, 2, 0, 3]);
-  assert.ok(first.atStart);
-  assert.equal(first.atEnd, false);
-  const middle = range({ scrollLeft: first.next * 384 });
-  assert.deepEqual([middle.first, middle.last, middle.next], [3, 5, 5]);
-  const last = range({ scrollLeft: middle.next * 384 });
-  assert.deepEqual([last.first, last.last, last.next], [5, 7, 5]);
-  assert.ok(last.atEnd);
+test('native scroll positions remain bounded through overscroll and responsive changes', () => {
+  assert.deepEqual([range().first, range().visible], [0, 3]);
+  assert.equal(range({ scrollLeft: -60 }).first, 0);
+  assert.equal(range({ scrollLeft: 9999 }).first, 5);
+  assert.deepEqual([range({ clientWidth: 360 }).first, range({ clientWidth: 360 }).visible], [0, 1]);
+  assert.equal(range({ clientWidth: 744 }).visible, 2);
+  assert.equal(range({ scrollLeft: 2688, clientWidth: 1128 }).first, 5);
+  assert.equal(range({ count: 0, cardWidth: 0 }).visible, 0);
 });
 
-test('phone and tablet layouts expose the correct number of projects', () => {
-  const phone = range({ clientWidth: 360 });
-  assert.deepEqual([phone.first, phone.last, phone.next], [0, 0, 1]);
-  const tablet = range({ clientWidth: 744 });
-  assert.deepEqual([tablet.first, tablet.last, tablet.next], [0, 1, 2]);
-  const phoneEnd = range({ clientWidth: 360, scrollLeft: 2688 });
-  assert.deepEqual([phoneEnd.first, phoneEnd.last, phoneEnd.previous], [7, 7, 6]);
-  assert.ok(phoneEnd.atEnd);
+test('a recycled window crosses the last project without duplicates or a reversed order', () => {
+  const order = [...context.carouselOrder({ first: 7, slot: 2, count: 8 })];
+  assert.deepEqual(order, [5, 6, 7, 0, 1, 2, 3, 4]);
+  assert.equal(new Set(order).size, 8);
+  assert.deepEqual(order.slice(2, 5), [7, 0, 1], 'last project is followed by the first two');
+  assert.deepEqual([...context.carouselOrder({ first: 0, slot: 3, count: 8 })], [5, 6, 7, 0, 1, 2, 3, 4]);
+  assert.deepEqual([...context.carouselOrder({ first: 0, slot: 0, count: 0 })], []);
 });
 
-test('elastic overscroll and resizing never produce out-of-range project positions', () => {
-  const negative = range({ scrollLeft: -60 });
-  assert.equal(negative.first, 0);
-  assert.ok(negative.atStart);
-  const pastEnd = range({ scrollLeft: 9999 });
-  assert.deepEqual([pastEnd.first, pastEnd.last], [5, 7]);
-  assert.ok(pastEnd.atEnd);
-  const resized = range({ scrollLeft: 2688, clientWidth: 1128 });
-  assert.deepEqual([resized.first, resized.last], [5, 7]);
-});
-
-test('a single project or empty collection has no enabled navigation', () => {
-  const single = range({ count: 1, clientWidth: 360, scrollWidth: 360 });
-  assert.deepEqual([single.first, single.last, single.previous, single.next], [0, 0, 0, 0]);
-  assert.ok(single.atStart && single.atEnd);
-  const empty = range({ count: 0, cardWidth: 0, clientWidth: 0, scrollWidth: 0 });
-  assert.equal(empty.visible, 0);
-  assert.ok(empty.atStart && empty.atEnd);
+test('wrapped position labels identify the visible projects', () => {
+  assert.equal(context.carouselLabel({ first: 0, visible: 3, count: 8 }), '1–3 of 8');
+  assert.equal(context.carouselLabel({ first: 7, visible: 3, count: 8 }), '8, 1, 2 of 8');
+  assert.equal(context.carouselLabel({ first: 7, visible: 1, count: 8 }), '8 of 8');
+  assert.equal(context.carouselLabel({ first: 0, visible: 0, count: 0 }), '0 projects');
 });
 
 function autoplayHarness(reducedMotion = false) {
@@ -182,17 +166,16 @@ test('carousel transitions ease in and out, finish exactly, and can be interrupt
   assert.equal(frames.size, 0);
 });
 
-test('automatic movement reverses at the ends without jumping across the gallery', () => {
+test('automatic and manual movement wrap around the complete collection', () => {
   let first = 0;
-  let direction = 1;
   const seen = [];
   for (let i = 0; i < 12; i += 1) {
-    const step = context.carouselStep({ first, visible: 3, count: 8, direction });
-    first = step.index;
-    direction = step.direction;
+    first = context.carouselStep({ first, count: 8 });
     seen.push(first);
   }
-  assert.deepEqual(seen, [1, 2, 3, 4, 5, 4, 3, 2, 1, 0, 1, 2]);
-  assert.equal(context.carouselStep({ first: 0, visible: 1, count: 1 }).index, 0);
-  assert.equal(context.carouselStep({ first: 0, visible: 0, count: 0 }).index, 0);
+  assert.deepEqual(seen, [1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4]);
+  assert.equal(context.carouselStep({ first: 0, count: 8, step: -3 }), 5);
+  assert.equal(context.carouselStep({ first: 7, count: 8, step: 3 }), 2);
+  assert.equal(context.carouselStep({ first: 0, count: 1 }), 0);
+  assert.equal(context.carouselStep({ first: 0, count: 0 }), 0);
 });

@@ -25,7 +25,6 @@ h2 { font-size: 2.625rem; font-weight: 650; letter-spacing: -.04em; }
 h3 { font-size: 23px; font-weight: 700; line-height: 1.2; }
 .container { width: min(1140px, calc(100% - var(--gutter) * 2)); margin-inline: auto; }
 .section { padding-top: 72px; }
-.section > h2 { margin-bottom: 26px; }
 section[id] { scroll-margin-top: 24px; }
 :where(a, button, summary, video, [tabindex]):focus-visible { outline: 2px solid var(--highlight); outline-offset: 3px; }
 main:focus { outline: none; }
@@ -53,7 +52,6 @@ main:focus { outline: none; }
 .hero-aside { padding-bottom: 8px; max-width: 360px; }
 .hero-text { font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.4; letter-spacing: -.02em; margin-bottom: 28px; }
 .text-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 1rem; text-decoration-thickness: 1px; }
-.btn { display: inline-flex; align-items: center; min-height: 48px; }
 .section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 24px; margin-bottom: 36px; }
 .section-heading p { color: var(--muted); font-size: 1rem; }
 
@@ -81,7 +79,7 @@ main:focus { outline: none; }
 .featured-video .text-link { margin-top: 18px; }
 .collection-section { padding-top: 88px; }
 
-/* Native scrolling is the foundation; controls add bounded navigation. */
+/* Native scrolling with a recycled window for continuous rotation. */
 .work-carousel { min-width: 0; }
 .carousel-track { display: grid; grid-auto-flow: column; grid-auto-columns: calc((100% - 48px) / 3); gap: 24px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 24px; padding: 6px 24px 12px; margin-inline: -6px; scrollbar-width: thin; scrollbar-color: var(--line) var(--bg); -webkit-mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 40px), transparent); }
 /* Keep keyboard focus fully visible at the clipped edges. */

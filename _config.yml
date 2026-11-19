@@ -8,7 +8,7 @@ baseurl: ""
 
 author:
   name: Michael Taylor
-email: michaeltaylor82@gmail.com
+email: taylor@taylorsdesignllc.com
 business_name: Taylor's Design LLC
 logo: /assets/images/logo-mark-studio.svg
 image: /assets/images/social-card-studio.jpg
@@ -39,6 +39,7 @@ sass:
 
 exclude:
   - _preview
+  - design
   - AGENTS.md
   - Claude outputs
   - test

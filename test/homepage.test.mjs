@@ -43,7 +43,7 @@ test('primary navigation resolves and contact uses the configured email', () => 
   for (const match of html.matchAll(/href="\/?#([^"]+)"/g)) {
     assert.ok(html.includes(`id="${match[1]}"`), `Missing anchor: ${match[1]}`);
   }
-  assert.match(html, /href="mailto:michaeltaylor82@gmail\.com">michaeltaylor82@gmail\.com<\/a>/);
+  assert.match(html, /href="mailto:taylor@taylorsdesignllc\.com">taylor@taylorsdesignllc\.com<\/a>/);
   assert.doesNotMatch(html, /<form\b/);
 });
 
