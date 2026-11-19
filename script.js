@@ -47,40 +47,185 @@ if (navToggle && navLinks) {
   mobileNavigation.addEventListener('change', () => closeNavigation());
 }
 
-/* ---------- Category filtering on the work index ---------- */
-const filterChips = document.querySelectorAll('.filter-chip');
-const projectRows = document.querySelectorAll('#project-list .project-row');
-const workEmpty = document.querySelector('.work-empty');
-const filterStatus = document.querySelector('.filter-status');
+/* ---------- Manual portfolio carousel ---------- */
+// Shared with the controls: counts and targets stay bounded during touch
+// overscroll, partial scroll positions and responsive column changes.
+function carouselRange({ scrollLeft, clientWidth, scrollWidth, cardWidth, gap, count }) {
+  if (!count || cardWidth <= 0 || clientWidth <= 0) {
+    return { first: 0, last: 0, visible: 0, previous: 0, next: 0, atStart: true, atEnd: true };
+  }
+  const stride = cardWidth + gap;
+  const visible = Math.min(count, Math.max(1, Math.round((clientWidth + gap) / stride)));
+  const maximum = Math.max(0, count - visible);
+  const first = Math.min(maximum, Math.max(0, Math.round(scrollLeft / stride)));
+  return {
+    first,
+    last: Math.min(count - 1, first + visible - 1),
+    visible,
+    previous: Math.max(0, first - visible),
+    next: Math.min(maximum, first + visible),
+    atStart: scrollLeft <= 2 || !maximum,
+    atEnd: scrollLeft + clientWidth >= scrollWidth - 2 || !maximum,
+  };
+}
 
-if (filterChips.length && projectRows.length) {
-  filterChips.forEach((chip) => {
-    chip.addEventListener('click', () => {
-      const filter = chip.dataset.filter;
-      let shown = 0;
+function carouselAutoplay({ advance, render, reducedMotion = false }) {
+  let playing = !reducedMotion;
+  let hovering = false;
+  let focused = false;
+  let explicitFocusPlay = false;
+  let visible = true;
+  let timer;
 
-      filterChips.forEach((other) => {
-        const isActive = other === chip;
-        other.classList.toggle('is-active', isActive);
-        other.setAttribute('aria-pressed', String(isActive));
-      });
+  const schedule = () => {
+    clearTimeout(timer);
+    if (playing && !hovering && visible && (!focused || explicitFocusPlay)) {
+      timer = setTimeout(() => { advance(); schedule(); }, 6000);
+    }
+  };
+  const sync = () => { render(playing); schedule(); };
+  const controls = {
+    isPlaying: () => playing,
+    pause() { playing = false; explicitFocusPlay = false; sync(); },
+    play() { playing = true; explicitFocusPlay = true; sync(); },
+    setHover(value) { hovering = value; sync(); },
+    focus(isRotationControl) {
+      focused = true;
+      explicitFocusPlay = false;
+      // Preserve the Pause button's requested state while it receives focus,
+      // so a pointer click does not accidentally turn Pause into Play.
+      if (!isRotationControl) playing = false;
+      sync();
+    },
+    blur() {
+      if (focused && !explicitFocusPlay) playing = false;
+      focused = false;
+      explicitFocusPlay = false;
+      sync();
+    },
+    setVisible(value) { visible = value; sync(); },
+  };
+  sync();
+  return controls;
+}
 
-      projectRows.forEach((row) => {
-        const match = filter === 'all' || row.dataset.category === filter;
-        row.hidden = !match;
-        if (match) {
-          shown += 1;
-        }
-      });
+const carousel = document.querySelector('[data-carousel]');
+if (carousel) {
+  const track = carousel.querySelector('.carousel-track');
+  const slides = Array.from(track.querySelectorAll('.carousel-slide'));
+  const previous = carousel.querySelector('.carousel-previous');
+  const next = carousel.querySelector('.carousel-next');
+  const status = carousel.querySelector('.carousel-status');
+  const announcement = carousel.querySelector('.carousel-announcement');
+  const toggle = carousel.querySelector('.carousel-toggle');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-      if (workEmpty) {
-        workEmpty.hidden = shown !== 0;
-      }
-
-      if (filterStatus) {
-        const label = filter === 'all' ? 'all categories' : chip.textContent.trim();
-        filterStatus.textContent = `Showing ${shown} ${shown === 1 ? 'project' : 'projects'} in ${label}.`;
-      }
-    });
+  slides.forEach((slide, index) => {
+    slide.setAttribute('aria-label', `${index + 1} of ${slides.length}: ${slide.dataset.projectTitle}`);
   });
+
+  const measure = () => {
+    const style = getComputedStyle(track);
+    const gap = parseFloat(style.columnGap) || 0;
+    const padding = (parseFloat(style.paddingLeft) || 0) + (parseFloat(style.paddingRight) || 0);
+    const cardWidth = slides[0]?.getBoundingClientRect().width || 0;
+    return {
+      stride: cardWidth + gap,
+      range: carouselRange({
+        scrollLeft: track.scrollLeft,
+        clientWidth: track.clientWidth - padding,
+        scrollWidth: track.scrollWidth - padding,
+        cardWidth, gap, count: slides.length,
+      }),
+    };
+  };
+
+  const update = () => {
+    const { range } = measure();
+    previous.setAttribute('aria-disabled', String(range.atStart));
+    next.setAttribute('aria-disabled', String(range.atEnd));
+    const positions = range.first === range.last ? `${range.first + 1}` : `${range.first + 1}–${range.last + 1}`;
+    const label = range.visible ? `${positions} of ${slides.length}` : '0 projects';
+    if (status.textContent !== label) status.textContent = label;
+  };
+
+  const moveTo = (index, instant = false) => {
+    const { stride } = measure();
+    track.scrollTo({ left: index * stride, behavior: instant || reducedMotion.matches ? 'auto' : 'smooth' });
+  };
+
+  const rotation = carouselAutoplay({
+    reducedMotion: reducedMotion.matches,
+    advance: () => {
+      const { range } = measure();
+      if (range.visible >= slides.length) return;
+      const wrap = range.atEnd;
+      moveTo(wrap ? 0 : range.first + 1, wrap);
+    },
+    render: (playing) => {
+      toggle.textContent = playing ? 'Pause' : 'Play';
+      toggle.setAttribute('aria-label', playing ? 'Pause carousel' : 'Play carousel');
+      announcement.setAttribute('aria-live', playing ? 'off' : 'polite');
+    },
+  });
+
+  let announcementTimer;
+  const announce = () => {
+    clearTimeout(announcementTimer);
+    if (announcement.textContent !== status.textContent) announcement.textContent = status.textContent;
+  };
+  const updateAndSettle = () => {
+    update();
+    clearTimeout(announcementTimer);
+    announcementTimer = setTimeout(announce, 180);
+  };
+
+  toggle.addEventListener('click', () => rotation.isPlaying() ? rotation.pause() : rotation.play());
+  carousel.addEventListener('pointerenter', (event) => {
+    if (event.pointerType === 'mouse') rotation.setHover(true);
+  });
+  carousel.addEventListener('pointerleave', (event) => {
+    if (event.pointerType === 'mouse') rotation.setHover(false);
+  });
+  carousel.addEventListener('focusin', (event) => rotation.focus(event.target === toggle));
+  carousel.addEventListener('focusout', (event) => {
+    if (!carousel.contains(event.relatedTarget)) rotation.blur();
+  });
+  track.addEventListener('pointerdown', () => rotation.pause(), { passive: true });
+  track.addEventListener('wheel', (event) => {
+    if (Math.abs(event.deltaX) > Math.abs(event.deltaY) || event.shiftKey) rotation.pause();
+  }, { passive: true });
+  document.addEventListener('visibilitychange', () => rotation.setVisible(!document.hidden));
+  reducedMotion.addEventListener('change', (event) => { if (event.matches) rotation.pause(); });
+
+  previous.addEventListener('click', () => {
+    rotation.pause();
+    const { range } = measure();
+    if (!range.atStart) moveTo(range.previous);
+  });
+  next.addEventListener('click', () => {
+    rotation.pause();
+    const { range } = measure();
+    if (!range.atEnd) moveTo(range.next);
+  });
+  track.addEventListener('scroll', updateAndSettle, { passive: true });
+  track.addEventListener('scrollend', announce);
+  track.addEventListener('keydown', (event) => {
+    // Keep native keyboard behavior inside project links and disclosures.
+    if (event.target !== track) return;
+    const { range } = measure();
+    let target;
+    if (event.key === 'ArrowLeft') target = range.previous;
+    if (event.key === 'ArrowRight') target = range.next;
+    if (event.key === 'Home') target = 0;
+    if (event.key === 'End') target = Math.max(0, slides.length - range.visible);
+    if (target === undefined) return;
+    event.preventDefault();
+    moveTo(target);
+  });
+  window.addEventListener('resize', updateAndSettle);
+  if (typeof ResizeObserver !== 'undefined') new ResizeObserver(updateAndSettle).observe(track);
+  rotation.setVisible(!document.hidden);
+  update();
+  announce();
 }

@@ -1,6 +1,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0A0A0B">
+<meta name="theme-color" content="#12191D">
 
 {% seo %}
 
@@ -9,7 +9,7 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; media-src 'self'; connect-src 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 
 <link rel="stylesheet" href="{{ '/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
-<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/logo-mark-blue.svg' | relative_url }}">
+<link rel="icon" type="image/svg+xml" href="{{ '/assets/images/logo-mark-studio.svg' | relative_url }}">
 <script src="{{ '/script.js' | relative_url }}" defer></script>
 
 {% if page.url == '/' %}
@@ -20,8 +20,8 @@
   "name": "Taylor's Design Media",
   "alternateName": "Taylor's Design LLC",
   "url": "{{ site.url }}",
-  "logo": "{{ '/assets/images/logo-full-blue-pink.svg' | absolute_url }}",
-  "image": "{{ '/assets/images/social-card.png' | absolute_url }}",
+  "logo": "{{ '/assets/images/logo-full-studio.svg' | absolute_url }}",
+  "image": "{{ '/assets/images/social-card-studio.jpg' | absolute_url }}",
   "email": "{{ site.email }}",
   "description": {{ site.description | strip_newlines | strip | jsonify }},
   "founder": {

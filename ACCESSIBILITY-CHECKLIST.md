@@ -17,7 +17,7 @@ The site code is designed to support WCAG 2.2 Level AA. Accessibility is an ongo
 1. Use only the Tab, Shift+Tab, Enter, Space, and Escape keys to test the site.
 2. At 200% browser zoom, confirm text does not overlap or disappear.
 3. At 400% zoom or a 320 CSS-pixel viewport, confirm the page reflows without horizontal scrolling.
-4. Confirm the featured image is static and Reduce Motion disables smooth scrolling. Check the mobile menu, both expandable sections, portfolio filters and visible keyboard focus.
+4. Confirm Pause stops carousel rotation, keyboard focus and hover pause it, and Reduce Motion starts it paused. Check Previous/Next, arrow keys, Home/End, project disclosures, the mobile menu and visible keyboard focus. Verify all projects remain reachable without JavaScript.
 5. Test with a screen reader such as VoiceOver, NVDA, or Narrator.
 6. Run an automated scan with Lighthouse or axe, then review all results manually.
 
