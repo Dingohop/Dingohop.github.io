@@ -7,7 +7,7 @@ import vm from 'node:vm';
 const root = new URL('../', import.meta.url);
 const read = (file) => fs.readFileSync(new URL(file, root), 'utf8');
 const head = read('_includes/head.html');
-const video = read('_includes/video-embed.html');
+const videoTemplates = ['_includes/project-row.html', '_includes/featured-video.html'];
 
 test('hero markup works with the policy that blocks inline styles', () => {
   const hero = read('index.html').match(/<section id="top"[\s\S]*?<\/section>/)?.[0];
@@ -17,7 +17,7 @@ test('hero markup works with the policy that blocks inline styles', () => {
 
 test('production build excludes internal notes, old previews, and test files', () => {
   const excluded = read('_config.yml').split(/^exclude:\s*$/m)[1] ?? '';
-  for (const entry of ['AGENTS.md', 'Claude outputs', 'test']) {
+  for (const entry of ['_preview', 'design', 'AGENTS.md', 'Claude outputs', 'test']) {
     assert.ok(excluded.split('\n').some((line) => line.trim() === `- ${entry}`), entry);
   }
 });
@@ -54,14 +54,19 @@ test('browser policy blocks connections and frames before resources load', () =>
 });
 
 test('video links leave the site explicitly without sharing the referring page', () => {
-  const link = video.match(/<a\b[\s\S]*?<\/a>/)?.[0];
-  assert.ok(link);
-  assert.match(link, /href="https:\/\/www\.youtube\.com\/watch\?v=/);
-  assert.match(link, /target="_blank"/);
-  assert.match(link, /rel="noopener noreferrer"/);
-  assert.match(link, /referrerpolicy="no-referrer"/);
-  assert.match(link, /on YouTube \(opens in a new tab\)/);
-  assert.doesNotMatch(video, /<iframe|data-video-id|data-fallback/i);
+  for (const file of videoTemplates) {
+    const video = read(file);
+    const links = [...video.matchAll(/<a\b[\s\S]*?<\/a>/g)].map((match) => match[0]);
+    assert.ok(links.length > 0, `${file} has video links`);
+    for (const link of links) {
+      assert.match(link, /href="https:\/\/www\.youtube\.com\/watch\?v=/, file);
+      assert.match(link, /target="_blank"/, file);
+      assert.match(link, /rel="noopener noreferrer"/, file);
+      assert.match(link, /referrerpolicy="no-referrer"/, file);
+      assert.match(link, /on YouTube \(opens in a new tab\)/, file);
+    }
+    assert.doesNotMatch(video, /<iframe|data-video-id|data-fallback/i, file);
+  }
   for (const file of fs.readdirSync(new URL('_projects/', root))) {
     const thumbnail = read(`_projects/${file}`).match(/^thumbnail:\s*(\S+)/m)?.[1];
     if (thumbnail) {
